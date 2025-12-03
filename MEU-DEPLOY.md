@@ -152,15 +152,25 @@ Após o deploy concluir:
 ## 🆘 Troubleshooting
 
 ### Erro: "Cannot connect to database"
-1. Verifique se executou os scripts SQL no Supabase
-2. Confirme que as variáveis de ambiente estão corretas no Render
+1. Confirme que as variáveis de ambiente estão corretas no Render
+2. Verifique se o Supabase está online
 3. Teste a conexão no Supabase:
    - Settings > Database > Connection info
+
+### Banco de dados não foi inicializado
+1. Veja os logs do deploy no Render
+2. Procure por mensagens como "Initializing database schema..."
+3. Se necessário, faça um novo deploy: Manual Deploy > Deploy latest commit
 
 ### Erro: "Build failed"
 1. Veja os logs de build no Render
 2. Verifique se os arquivos da pasta `lib/` estão no repositório
-3. Tente fazer um novo deploy: Manual Deploy > Deploy latest commit
+3. Se o erro for sobre repositórios Debian/apt-get, atualize o código (já corrigido!)
+4. Tente fazer um novo deploy: Manual Deploy > Deploy latest commit
+
+### Erro: "apt-get" ou "404 Not Found Debian"
+- ✅ Já corrigido! Atualizamos para Tomcat 8.5
+- Faça um novo deploy no Render
 
 ### Aplicação não carrega
 1. Aguarde 30-60 segundos (plano Free é lento na primeira carga)
