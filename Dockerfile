@@ -64,8 +64,8 @@ RUN mkdir -p /usr/local/tomcat/conf/Catalina/localhost
 # Expose port
 EXPOSE 8080
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+# Health check - verificar Tomcat está rodando
+HEALTHCHECK --interval=30s --timeout=10s --start-period=120s --retries=5 \
   CMD curl -f http://localhost:8080/ || exit 1
 
 # Set entrypoint
