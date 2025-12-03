@@ -29,7 +29,7 @@ COPY src/ ./src/
 COPY WebContent/ ./WebContent/
 
 # Build the application
-RUN mvn clean package -DskipTests -o
+RUN mvn clean package -DskipTests
 
 # Production stage
 FROM tomcat:8.5-jre8
