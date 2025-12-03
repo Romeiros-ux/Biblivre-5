@@ -32,11 +32,11 @@ COPY WebContent/ ./WebContent/
 RUN mvn clean package -DskipTests -o
 
 # Production stage
-FROM tomcat:7-jre8
+FROM tomcat:8.5-jre8
 
 # Install PostgreSQL client for health checks
 RUN apt-get update && \
-    apt-get install -y postgresql-client && \
+    apt-get install -y postgresql-client curl && \
     rm -rf /var/lib/apt/lists/*
 
 # Remove default webapps
