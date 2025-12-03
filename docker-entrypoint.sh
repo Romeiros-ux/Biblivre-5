@@ -72,8 +72,11 @@ if [ "$SCHEMA_EXISTS" != "1" ]; then
   echo "Initializing database schema..."
   
   # Check if SQL files exist in the container
-  if [ -f /app/sql/createdatabase.sql ] && [ -f /app/sql/biblivre4.sql ]; then
-    PGPASSWORD=$DB_PASSWORD psql -h "$DB_HOST" -U "$DB_USER" -d "$DB_NAME" -f /app/sql/createdatabase.sql || true
+  if [ -f /app/sql/biblivre4.sql ]; then
+    echo "Creating global schema..."
+    PGPASSWORD=$DB_PASSWORD psql -h "$DB_HOST" -U "$DB_USER" -d "$DB_NAME" -c "CREATE SCHEMA IF NOT EXISTS global; GRANT ALL ON SCHEMA global TO postgres; GRANT ALL ON SCHEMA public TO postgres;" || true
+    
+    echo "Executing biblivre4.sql (this may take several minutes)..."
     PGPASSWORD=$DB_PASSWORD psql -h "$DB_HOST" -U "$DB_USER" -d "$DB_NAME" -f /app/sql/biblivre4.sql || true
     echo "Database schema initialized!"
   else
