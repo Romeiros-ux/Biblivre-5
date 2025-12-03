@@ -2,8 +2,28 @@
 
 Biblioteca Livre Internacional 5.0.5
 
+> 🚀 **Novo!** Agora com suporte para deploy em nuvem com Supabase + Render  
+> 📖 Veja o [Guia Rápido de Deploy](QUICKSTART.md) ou [Guia Completo](DEPLOY.md)
 
-## Dependências
+## Deploy em Nuvem (Recomendado)
+
+Para usar o Biblivre-5 na web sem instalar nada localmente:
+
+1. **[Guia Rápido (5 min)](QUICKSTART.md)** - Setup rápido com Supabase + Render
+2. **[Guia Completo](DEPLOY.md)** - Instruções detalhadas e troubleshooting
+
+**Vantagens:**
+- ✅ Gratuito para começar (planos free disponíveis)
+- ✅ Banco de dados PostgreSQL gerenciado (Supabase)
+- ✅ Deploy automático e SSL incluído
+- ✅ Escalável e com backup automático
+- ✅ Sem necessidade de servidor próprio
+
+---
+
+## Instalação Local
+
+### Dependências
 
 - [PostgreSQL 9.1](https://www.postgresql.org/);
 - [Apache Tomcat 7.0](http://tomcat.apache.org/);
@@ -65,6 +85,31 @@ Após baixar o código-fonte, para rodar o Biblivre em sua máquina será necess
 	- ```
 	  mvn install:install-file -Dfile=normalizer-2.6.jar -DgroupId=com.ibm.icu -DartifactId=normalizer -Dversion=2.6 -Dpackaging=jar
       ```
+
+## Deploy e Hospedagem
+
+### Deploy em Nuvem (Supabase + Render)
+
+Consulte os guias:
+- **[QUICKSTART.md](QUICKSTART.md)** - Guia rápido de 5 minutos
+- **[DEPLOY.md](DEPLOY.md)** - Guia completo com troubleshooting
+
+**Arquivos de configuração:**
+- `Dockerfile` - Containerização da aplicação
+- `render.yaml` - Configuração do Render
+- `docker-entrypoint.sh` - Script de inicialização
+- `sql/supabase-init.sql` - Inicialização do banco no Supabase
+
+### Teste Local com Docker
+
+```bash
+# Testar localmente antes do deploy
+bash test-local.sh
+```
+
+Acesse: http://localhost:8080
+
+---
 
 ## Fork
 
