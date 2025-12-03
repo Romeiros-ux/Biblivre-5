@@ -34,9 +34,9 @@ RUN mvn clean package -DskipTests
 # Production stage
 FROM tomcat:8.5-jre8
 
-# Install PostgreSQL client for health checks
+# Install curl for health checks
 RUN apt-get update && \
-    apt-get install -y postgresql-client curl && \
+    apt-get install -y curl && \
     rm -rf /var/lib/apt/lists/*
 
 # Remove default webapps

@@ -1,14 +1,7 @@
 #!/bin/bash
 set -e
 
-# Wait for database to be ready
-echo "Waiting for database to be ready..."
-until PGPASSWORD=$DB_PASSWORD psql -h "$DB_HOST" -U "$DB_USER" -d "$DB_NAME" -c '\q'; do
-  >&2 echo "Database is unavailable - sleeping"
-  sleep 2
-done
-
->&2 echo "Database is up - executing command"
+echo "Configuring Biblivre with Supabase database..."
 
 # Create context.xml with Supabase credentials
 cat > /usr/local/tomcat/conf/Catalina/localhost/ROOT.xml <<EOF
@@ -65,26 +58,9 @@ cat > /usr/local/tomcat/conf/Catalina/localhost/ROOT.xml <<EOF
 </Context>
 EOF
 
-# Check if database schema exists, if not initialize it
-SCHEMA_EXISTS=$(PGPASSWORD=$DB_PASSWORD psql -h "$DB_HOST" -U "$DB_USER" -d "$DB_NAME" -tAc "SELECT 1 FROM information_schema.schemata WHERE schema_name = 'global'" || echo "0")
-
-if [ "$SCHEMA_EXISTS" != "1" ]; then
-  echo "Initializing database schema..."
-  
-  # Check if SQL files exist in the container
-  if [ -f /app/sql/biblivre4.sql ]; then
-    echo "Creating global schema..."
-    PGPASSWORD=$DB_PASSWORD psql -h "$DB_HOST" -U "$DB_USER" -d "$DB_NAME" -c "CREATE SCHEMA IF NOT EXISTS global; GRANT ALL ON SCHEMA global TO postgres; GRANT ALL ON SCHEMA public TO postgres;" || true
-    
-    echo "Executing biblivre4.sql (this may take several minutes)..."
-    PGPASSWORD=$DB_PASSWORD psql -h "$DB_HOST" -U "$DB_USER" -d "$DB_NAME" -f /app/sql/biblivre4.sql || true
-    echo "Database schema initialized!"
-  else
-    echo "Warning: SQL initialization files not found. Please initialize the database manually."
-  fi
-else
-  echo "Database schema already exists. Skipping initialization."
-fi
+echo "Configuration completed. Starting Tomcat..."
+echo "Note: Database will be initialized automatically on first access through the application."
+echo "Application will be available at: http://localhost:8080/"
 
 # Execute the main command
 exec "$@"
