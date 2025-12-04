@@ -32,11 +32,14 @@ public class BiblivreInitializer {
 				Updates.fixPostgreSQL81();
 				Updates.globalUpdate();
 
-				BiblivreInitializer.Z3950server = new Z3950ServerBO();
-				BiblivreInitializer.Z3950server.startServer();
+				// Z3950 Server desabilitado temporariamente para evitar timeout no deploy
+				// BiblivreInitializer.Z3950server = new Z3950ServerBO();
+				// BiblivreInitializer.Z3950server.startServer();
 
 				BiblivreInitializer.initialized = true;
 			} catch (Exception e) {
+				// Log the exception for debugging
+				e.printStackTrace();
 			}
 		}
 	}
