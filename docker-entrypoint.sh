@@ -21,7 +21,7 @@ cat > /usr/local/tomcat/conf/Catalina/localhost/ROOT.xml <<EOF
 		type="javax.sql.DataSource" 
 		accessToUnderlyingConnectionAllowed="true" 
 		name="jdbc/biblivre4" 
-		url="jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require"
+		url="jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require&amp;currentSchema=global"
 	/>
 	<Resource 
 		auth="Container" 
@@ -37,7 +37,7 @@ cat > /usr/local/tomcat/conf/Catalina/localhost/ROOT.xml <<EOF
 		type="javax.sql.DataSource" 
 		accessToUnderlyingConnectionAllowed="true" 
 		name="jdbc/biblivre3" 
-		url="jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require"
+		url="jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require&amp;currentSchema=global"
 	/>
 	<Resource 
 		auth="Container" 
@@ -53,7 +53,7 @@ cat > /usr/local/tomcat/conf/Catalina/localhost/ROOT.xml <<EOF
 		type="javax.sql.DataSource" 
 		accessToUnderlyingConnectionAllowed="true" 
 		name="jdbc/biblivre4_b3b_restore" 
-		url="jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require"
+		url="jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require&amp;currentSchema=global"
 	/>
 </Context>
 EOF
