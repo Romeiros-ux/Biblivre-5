@@ -30,10 +30,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletRequestWrapper;
 import jakarta.servlet.http.HttpSession;
 
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload2.core.DiskFileItemFactory;
+import org.apache.commons.fileupload2.core.FileItem;
+import org.apache.commons.fileupload2.jakarta.servlet6.JakartaServletFileUpload;
 import org.apache.commons.lang3.StringUtils;
 
 import biblivre.core.configurations.Configurations;
@@ -268,15 +267,16 @@ public class ExtendedRequest extends HttpServletRequestWrapper {
 	
 	@SuppressWarnings("unchecked")
 	private void loadMultiPart() {
-		this.multiPart = ServletFileUpload.isMultipartContent(this);
+		this.multiPart = JakartaServletFileUpload.isMultipartContent(this);
 
 		if (this.multiPart) {
 			this.multiPartParameters = new HashMap<String, String>();
 			this.multiPartFiles = new HashMap<String, MemoryFile>();
 			
 			try {
-				FileItemFactory factory = new DiskFileItemFactory();
-				ServletFileUpload upload = new ServletFileUpload(factory);
+				DiskFileItemFactory.Builder factory = DiskFileItemFactory.builder();
+				JakartaServletFileUpload<DiskFileItemFactory.Builder, DiskFileItemFactory> upload = 
+					new JakartaServletFileUpload<>(factory.get());
 				List<FileItem> items = upload.parseRequest(this);
 
 				for (FileItem item : items) {

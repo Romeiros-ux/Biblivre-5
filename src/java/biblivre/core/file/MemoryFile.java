@@ -23,20 +23,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload2.core.FileItem;
 import org.apache.commons.io.IOUtils;
 
 import biblivre.core.utils.Constants;
 
 public class MemoryFile extends BiblivreFile {
 
-	private FileItem fileItem;
+	private FileItem<?> fileItem;
 	private InputStream inputStream;
 
 	public MemoryFile() {
 	}
 
-	public MemoryFile(FileItem item) {
+	public MemoryFile(FileItem<?> item) {
 		this.fileItem = item;
 
 		this.setName(this.fileItem.getName());
