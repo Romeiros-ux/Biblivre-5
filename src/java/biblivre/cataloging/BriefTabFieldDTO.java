@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import biblivre.core.AbstractDTO;
 
 public class BriefTabFieldDTO extends AbstractDTO {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private String datafieldTag;

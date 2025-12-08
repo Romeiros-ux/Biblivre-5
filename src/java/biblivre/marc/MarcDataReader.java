@@ -309,7 +309,7 @@ public class MarcDataReader {
 		List<DataField> list = this.getDataFields(tag);
 		
 		if (list != null && list.size() > 0) {
-			return list.get(0);
+			return list.getFirst();
 		}
 		
 		return null;

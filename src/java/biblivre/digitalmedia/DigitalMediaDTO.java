@@ -22,7 +22,8 @@ package biblivre.digitalmedia;
 import biblivre.core.AbstractDTO;
 
 public class DigitalMediaDTO extends AbstractDTO {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private int id;

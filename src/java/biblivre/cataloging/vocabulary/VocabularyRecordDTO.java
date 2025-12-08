@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import biblivre.cataloging.RecordDTO;
 
 public class VocabularyRecordDTO extends RecordDTO {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	//transient fields

@@ -28,6 +28,7 @@ import org.apache.commons.lang3.StringUtils;
 import biblivre.core.AbstractDTO;
 
 public class IndexingDTO extends AbstractDTO {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	private Integer recordId;

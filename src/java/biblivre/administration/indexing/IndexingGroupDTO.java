@@ -33,6 +33,7 @@ import biblivre.core.utils.Pair;
  * E.g.: Authors will be indexed by datafields 100, 110, 111, etc.
  */
 public class IndexingGroupDTO extends AbstractDTO {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;

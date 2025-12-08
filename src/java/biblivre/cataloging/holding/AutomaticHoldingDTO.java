@@ -24,7 +24,8 @@ import biblivre.cataloging.enums.RecordDatabase;
 import biblivre.core.AbstractDTO;
 
 public class AutomaticHoldingDTO extends AbstractDTO {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 
     private Integer holdingCount;

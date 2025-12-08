@@ -398,8 +398,8 @@ public class JSONObject {
             this.put(key,
                     value instanceof JSONArray ? new JSONArray().put(value)
                             : value);
-        } else if (object instanceof JSONArray) {
-            ((JSONArray) object).put(value);
+        } else if (object instanceof JSONArray array) {
+            array.put(value);
         } else {
             this.put(key, new JSONArray().put(object).put(value));
         }
@@ -426,8 +426,8 @@ public class JSONObject {
         Object object = this.opt(key);
         if (object == null) {
             this.put(key, new JSONArray().put(value));
-        } else if (object instanceof JSONArray) {
-            this.put(key, ((JSONArray) object).put(value));
+        } else if (object instanceof JSONArray array) {
+            this.put(key, array.put(value));
         } else {
             throw new JSONException("JSONObject[" + key
                     + "] is not a JSONArray.");
@@ -496,11 +496,11 @@ public class JSONObject {
     public boolean getBoolean(String key) throws JSONException {
         Object object = this.get(key);
         if (object.equals(Boolean.FALSE)
-                || (object instanceof String && ((String) object)
+                || (object instanceof String string && string
                         .equalsIgnoreCase("false"))) {
             return false;
         } else if (object.equals(Boolean.TRUE)
-                || (object instanceof String && ((String) object)
+                || (object instanceof String string && string
                         .equalsIgnoreCase("true"))) {
             return true;
         }
@@ -521,7 +521,7 @@ public class JSONObject {
     public double getDouble(String key) throws JSONException {
         Object object = this.get(key);
         try {
-            return object instanceof Number ? ((Number) object).doubleValue()
+            return object instanceof Number n ? n.doubleValue()
                     : Double.parseDouble((String) object);
         } catch (Exception e) {
             throw new JSONException("JSONObject[" + quote(key)
@@ -542,7 +542,7 @@ public class JSONObject {
     public int getInt(String key) throws JSONException {
         Object object = this.get(key);
         try {
-            return object instanceof Number ? ((Number) object).intValue()
+            return object instanceof Number n ? n.intValue()
                     : Integer.parseInt((String) object);
         } catch (Exception e) {
             throw new JSONException("JSONObject[" + quote(key)
@@ -561,8 +561,8 @@ public class JSONObject {
      */
     public JSONArray getJSONArray(String key) throws JSONException {
         Object object = this.get(key);
-        if (object instanceof JSONArray) {
-            return (JSONArray) object;
+        if (object instanceof JSONArray array) {
+            return array;
         }
         throw new JSONException("JSONObject[" + quote(key)
                 + "] is not a JSONArray.");
@@ -579,8 +579,8 @@ public class JSONObject {
      */
     public JSONObject getJSONObject(String key) throws JSONException {
         Object object = this.get(key);
-        if (object instanceof JSONObject) {
-            return (JSONObject) object;
+        if (object instanceof JSONObject nObject) {
+            return nObject;
         }
         throw new JSONException("JSONObject[" + quote(key)
                 + "] is not a JSONObject.");
@@ -599,7 +599,7 @@ public class JSONObject {
     public long getLong(String key) throws JSONException {
         Object object = this.get(key);
         try {
-            return object instanceof Number ? ((Number) object).longValue()
+            return object instanceof Number n ? n.longValue()
                     : Long.parseLong((String) object);
         } catch (Exception e) {
             throw new JSONException("JSONObject[" + quote(key)
@@ -660,8 +660,8 @@ public class JSONObject {
      */
     public String getString(String key) throws JSONException {
         Object object = this.get(key);
-        if (object instanceof String) {
-            return (String) object;
+        if (object instanceof String string) {
+            return string;
         } else {
         	return object.toString();
         }
@@ -695,14 +695,14 @@ public class JSONObject {
         Object value = this.opt(key);
         if (value == null) {
             this.put(key, 1);
-        } else if (value instanceof Integer) {
-            this.put(key, (Integer) value + 1);
-        } else if (value instanceof Long) {
-            this.put(key, (Long) value + 1);
-        } else if (value instanceof Double) {
-            this.put(key, (Double) value + 1);
-        } else if (value instanceof Float) {
-            this.put(key, (Float) value + 1);
+        } else if (value instanceof Integer integer) {
+            this.put(key, integer + 1);
+        } else if (value instanceof Long long1) {
+            this.put(key, long1 + 1);
+        } else if (value instanceof Double double1) {
+            this.put(key, double1 + 1);
+        } else if (value instanceof Float float1) {
+            this.put(key, float1 + 1);
         } else {
             throw new JSONException("Unable to increment [" + quote(key) + "].");
         }
@@ -911,7 +911,7 @@ public class JSONObject {
      */
     public JSONArray optJSONArray(String key) {
         Object o = this.opt(key);
-        return o instanceof JSONArray ? (JSONArray) o : null;
+        return o instanceof JSONArray jsona ? jsona : null;
     }
 
     /**
@@ -924,7 +924,7 @@ public class JSONObject {
      */
     public JSONObject optJSONObject(String key) {
         Object object = this.opt(key);
-        return object instanceof JSONObject ? (JSONObject) object : null;
+        return object instanceof JSONObject jsono ? jsono : null;
     }
 
     /**
@@ -1077,7 +1077,7 @@ public class JSONObject {
      *             If the key is null or if the number is invalid.
      */
     public JSONObject put(String key, double value) throws JSONException {
-        this.put(key, new Double(value));
+        this.put(key, Double.valueOf(value));
         return this;
     }
 
@@ -1093,7 +1093,7 @@ public class JSONObject {
      *             If the key is null.
      */
     public JSONObject put(String key, int value) throws JSONException {
-        this.put(key, new Integer(value));
+        this.put(key, Integer.valueOf(value));
         return this;
     }
 
@@ -1109,7 +1109,7 @@ public class JSONObject {
      *             If the key is null.
      */
     public JSONObject put(String key, long value) throws JSONException {
-        this.put(key, new Long(value));
+        this.put(key, Long.valueOf(value));
         return this;
     }
 
@@ -1313,12 +1313,12 @@ public class JSONObject {
                 String name = iterator.next();
                 Object valueThis = this.get(name);
                 Object valueOther = ((JSONObject)other).get(name);
-                if (valueThis instanceof JSONObject) {
-                    if (!((JSONObject)valueThis).similar(valueOther)) {
+                if (valueThis instanceof JSONObject object) {
+                    if (!object.similar(valueOther)) {
                         return false;
                     }
-                } else if (valueThis instanceof JSONArray) {
-                    if (!((JSONArray)valueThis).similar(valueOther)) {
+                } else if (valueThis instanceof JSONArray array) {
+                    if (!array.similar(valueOther)) {
                         return false;
                     }
                 } else if (!valueThis.equals(valueOther)) {
@@ -1369,7 +1369,7 @@ public class JSONObject {
                         return d;
                     }
                 } else {
-                    Long myLong = new Long(string);
+                    Long myLong = Long.valueOf(string);
                     if (string.equals(myLong.toString())) {
                         if (myLong == myLong.intValue()) {
                             return myLong.intValue();
@@ -1394,13 +1394,13 @@ public class JSONObject {
      */
     public static void testValidity(Object o) throws JSONException {
         if (o != null) {
-            if (o instanceof Double) {
-                if (((Double) o).isInfinite() || ((Double) o).isNaN()) {
+            if (o instanceof Double double1) {
+                if (double1.isInfinite() || double1.isNaN()) {
                     throw new JSONException(
                             "JSON does not allow non-finite numbers.");
                 }
-            } else if (o instanceof Float) {
-                if (((Float) o).isInfinite() || ((Float) o).isNaN()) {
+            } else if (o instanceof Float float1) {
+                if (float1.isInfinite() || float1.isNaN()) {
                     throw new JSONException(
                             "JSON does not allow non-finite numbers.");
                 }
@@ -1500,20 +1500,20 @@ public class JSONObject {
         if (value == null || value.equals(null)) {
             return "null";
         }
-        if (value instanceof JSONString) {
+        if (value instanceof JSONString string) {
             Object object;
             try {
-                object = ((JSONString) value).toJSONString();
+                object = string.toJSONString();
             } catch (Exception e) {
                 throw new JSONException(e);
             }
-            if (object instanceof String) {
-                return (String) object;
+            if (object instanceof String string) {
+                return string;
             }
             throw new JSONException("Bad value from toJSONString: " + object);
         }
-        if (value instanceof Number) {
-            return numberToString((Number) value);
+        if (value instanceof Number number) {
+            return numberToString(number);
         }
         if (value instanceof Boolean || value instanceof JSONObject || value instanceof JSONArray) {
             return value.toString();
@@ -1600,10 +1600,10 @@ public class JSONObject {
     static final Writer writeValue(Writer writer, Object value, int indentFactor, int indent) throws JSONException, IOException {
         if (value == null || value.equals(null)) {
             writer.write("null");
-        } else if (value instanceof JSONObject) {
-            ((JSONObject) value).write(writer, indentFactor, indent);
-        } else if (value instanceof JSONArray) {
-            ((JSONArray) value).write(writer, indentFactor, indent);
+        } else if (value instanceof JSONObject object) {
+            object.write(writer, indentFactor, indent);
+        } else if (value instanceof JSONArray array) {
+            array.write(writer, indentFactor, indent);
         } else if (value instanceof Map) {
             new JSONObject((Map<String, Object>) value).write(writer, indentFactor, indent);
         } else if (value instanceof Collection) {
@@ -1612,14 +1612,14 @@ public class JSONObject {
             new JSONArray(value).write(writer, indentFactor, indent);
         } else if (value instanceof Date) {
         	writer.write(quote(DateFormatUtils.ISO_DATETIME_TIME_ZONE_FORMAT.format(value)));
-        } else if (value instanceof Number) {
-            writer.write(numberToString((Number) value));
+        } else if (value instanceof Number number) {
+            writer.write(numberToString(number));
         } else if (value instanceof Boolean) {
             writer.write(value.toString());
-        } else if (value instanceof JSONString) {
+        } else if (value instanceof JSONString string) {
             Object o;
             try {
-                o = ((JSONString) value).toJSONString();
+                o = string.toJSONString();
             } catch (Exception e) {
                 throw new JSONException(e);
             }

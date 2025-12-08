@@ -321,7 +321,7 @@ public class FileIOUtils {
 			try {
 				output = response.getOutputStream();
 
-				if (ranges.isEmpty() || ranges.get(0) == full) {
+				if (ranges.isEmpty() || ranges.getFirst() == full) {
 					// Return full file.
 					Range r = full;
 					response.setContentType(contentType);
@@ -345,7 +345,7 @@ public class FileIOUtils {
 				} else if (ranges.size() == 1) {
 
 					// Return single part of file.
-					Range r = ranges.get(0);
+					Range r = ranges.getFirst();
 					response.setContentType(contentType);
 					response.setHeader("Content-Range", "bytes " + r.start + "-" + r.end + "/" + r.total);
 					response.setHeader("Content-Length", String.valueOf(r.length));

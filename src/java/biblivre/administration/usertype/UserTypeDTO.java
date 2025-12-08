@@ -22,6 +22,7 @@ package biblivre.administration.usertype;
 import biblivre.core.AbstractDTO;
 
 public class UserTypeDTO extends AbstractDTO {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;

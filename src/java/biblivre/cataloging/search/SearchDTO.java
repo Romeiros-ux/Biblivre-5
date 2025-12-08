@@ -31,6 +31,7 @@ import biblivre.core.DTOCollection;
 import biblivre.core.enums.SearchMode;
 
 public class SearchDTO extends DTOCollection<RecordDTO> {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private RecordType recordType;

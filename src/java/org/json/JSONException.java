@@ -7,7 +7,8 @@ package org.json;
  * @version 2014-05-03
  */
 public class JSONException extends RuntimeException {
-    private static final long serialVersionUID = 0;
+	@Serial
+	private static final long serialVersionUID = 0;
     private Throwable cause;
 
     /**

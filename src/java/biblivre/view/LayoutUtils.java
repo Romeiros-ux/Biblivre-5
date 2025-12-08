@@ -34,17 +34,17 @@ public class LayoutUtils {
 		boolean allowed = (atps == null || atps.isAllowed("menu", action));
 
 		if (allowed) {
-			return String.format("<li class=\"submenu_%1$s\" data-action=\"%2$s\"><a href=\"?action=%2$s\">%3$s</a></li>", module, action,
-					this.translationsMap.getText("menu." + action));
+			return "<li class=\"submenu_%1$s\" data-action=\"%2$s\"><a href=\"?action=%2$s\">%3$s</a></li>".formatted(module, action,
+						this.translationsMap.getText("menu." + action));
 		} else {
-			return String.format("<li class=\"disabled\" data-action=\"%s\">%s</li>", action, this.translationsMap.getText("menu." + action));
+			return "<li class=\"disabled\" data-action=\"%s\">%s</li>".formatted(action, this.translationsMap.getText("menu." + action));
 		}
 	}
 
 	public String menuLevel(AuthorizationPoints atps, String module, String... actions) {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(String.format("<li class=\"menu_%1$s\" data-module=\"%1$s\">", module));
+		sb.append("<li class=\"menu_%1$s\" data-module=\"%1$s\">".formatted(module));
 		sb.append(this.translationsMap.getText("menu." + module));
 
 		sb.append("<ul class=\"submenu\">");
@@ -96,8 +96,8 @@ public class LayoutUtils {
 		sb.append("</li>");
 
 		sb.append("<li class=\"inputs\">&#160;");
-		sb.append(String.format("<input type=\"text\" name=\"username\" placeholder=\"%s\">", this.translationsMap.getText("label.username")));
-		sb.append(String.format("<input type=\"password\" name=\"password\" placeholder=\"%s\">", this.translationsMap.getText("label.password")));
+		sb.append("<input type=\"text\" name=\"username\" placeholder=\"%s\">".formatted(this.translationsMap.getText("label.username")));
+		sb.append("<input type=\"password\" name=\"password\" placeholder=\"%s\">".formatted(this.translationsMap.getText("label.password")));
 		sb.append("</li>");
 
 		return sb.toString();

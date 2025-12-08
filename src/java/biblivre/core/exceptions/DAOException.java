@@ -24,11 +24,12 @@ import java.sql.BatchUpdateException;
 import org.apache.log4j.Logger;
 
 public class DAOException extends RuntimeException {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	private Logger logger = Logger.getLogger(this.getClass());
 	
     public DAOException(Exception cause) {
-    	super(cause instanceof BatchUpdateException ? ((BatchUpdateException)cause).getNextException() : cause);
+    	super(cause instanceof BatchUpdateException bue ? bue.getNextException() : cause);
 		this.logger.error(this.getCause().getMessage(), this.getCause());
     }
 }

@@ -102,7 +102,7 @@ public class QuotationDAO extends AbstractDAO {
 			return true;
 		}
 		
-		AbstractDTO abstractDto = dtoList.get(0);
+		AbstractDTO abstractDto = dtoList.getFirst();
 		
 		if (abstractDto instanceof QuotationDTO) {
 			return this.saveQuotationFromBiblivre3(dtoList);

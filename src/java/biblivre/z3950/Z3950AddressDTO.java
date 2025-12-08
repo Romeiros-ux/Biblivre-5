@@ -6,6 +6,7 @@ import biblivre.core.AbstractDTO;
  * Stub Z3950Address - funcionalidade Z3950 desabilitada
  */
 public class Z3950AddressDTO extends AbstractDTO {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;

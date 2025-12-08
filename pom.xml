@@ -23,9 +23,9 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jdk.version>1.8</jdk.version>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
+		<jdk.version>21</jdk.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 		<debug>false</debug>
 		<sass.OutputStyle>:expanded</sass.OutputStyle>
 	</properties>
@@ -69,17 +69,17 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>3.2.18.RELEASE</version>
+			<version>6.0.23</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
-			<version>3.2.18.RELEASE</version>
+			<version>6.0.23</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-beans</artifactId>
-			<version>3.2.18.RELEASE</version>
+			<version>6.0.23</version>
 		</dependency>
 
 		<dependency>
@@ -263,10 +263,8 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.0</version>
+				<version>3.14.1</version>
 				<configuration>
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
 					<debug>${debug}</debug>
 					<optimize>!${debug}</optimize>
 					<verbose>${debug}</verbose>				
@@ -277,13 +275,14 @@
 						<exclude>**/z3950/**/*.java</exclude>
 						<exclude>**/jzkit/**/*.java</exclude>
 					</excludes>
+					<release>21</release>
 				</configuration>
 			</plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
-				<version>2.3</version>
+				<version>3.5.1</version>
 				<configuration>
 					<webResources>
 						<resource>

@@ -44,8 +44,8 @@ public class Message {
 		this(level, message);
 
 		if (exception != null) {	
-			if (exception instanceof ValidationException) {
-				this.setErrorList(((ValidationException) exception).getErrorList());
+			if (exception instanceof ValidationException validationException) {
+				this.setErrorList(validationException.getErrorList());
 			} else {
 				this.setStackTrace(ExceptionUtils.getStackTrace(exception));
 			}

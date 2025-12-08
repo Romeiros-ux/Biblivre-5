@@ -24,7 +24,8 @@ import java.util.Date;
 import biblivre.core.AbstractDTO;
 
 public class ReservationDTO extends AbstractDTO {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;

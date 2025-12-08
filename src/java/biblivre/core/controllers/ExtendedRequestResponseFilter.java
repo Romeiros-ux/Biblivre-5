@@ -42,16 +42,16 @@ public class ExtendedRequestResponseFilter implements Filter {
 		ExtendedRequest xRequest = null;
 		ExtendedResponse xResponse = null;
 		
-		if (request instanceof ExtendedRequest) {
+		if (request instanceof ExtendedRequest extendedRequest) {
 			// Avoid rewrapping if forwarding
-			xRequest = (ExtendedRequest) request;
+			xRequest = extendedRequest;
 		} else {
 			xRequest = new ExtendedRequest((HttpServletRequest) request);
 		}
 		
-		if (response instanceof ExtendedResponse) {
+		if (response instanceof ExtendedResponse extendedResponse) {
 			// Avoid rewrapping if forwarding
-			xResponse = (ExtendedResponse) response;
+			xResponse = extendedResponse;
 		} else {
 			xResponse = new ExtendedResponse((HttpServletResponse) response);
 		}

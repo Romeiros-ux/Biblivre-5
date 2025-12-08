@@ -43,6 +43,7 @@ import biblivre.login.LoginDTO;
 import biblivre.view.LayoutUtils;
 
 public class LayoutBody extends BodyTagSupport {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private String schema;
@@ -201,7 +202,7 @@ public class LayoutBody extends BodyTagSupport {
 				for (LanguageDTO dto : languages) {
 					boolean selectedLanguage = translationsMap.getLanguage().equals(dto.getLanguage());
 					
-					out.println(String.format("<option value=\"%s\" %s>%s</option>", dto.getLanguage(), (selectedLanguage) ? "selected=\"selected\"" : "", dto.toString()));
+					out.println("<option value=\"%s\" %s>%s</option>".formatted(dto.getLanguage(), (selectedLanguage) ? "selected=\"selected\"" : "", dto.toString()));
 				}
 				
 				out.println("      </select>");
@@ -359,7 +360,7 @@ public class LayoutBody extends BodyTagSupport {
 			out.println("<noscript>");
 			out.println(translationsMap.getHtml("text.main.noscript"));
 			out.println("  <ul>");
-			out.println(String.format("<li><a href=\"?action=list_bibliographic\">Bibliográfica</a></li>"));
+			out.println("<li><a href=\"?action=list_bibliographic\">Bibliográfica</a></li>".formatted());
 			// TODO: SEO
 			//out.println(String.format("<li><a href=\"?action=list_authorities\">Autoridades</a></li>"));
 			//out.println(String.format("<li><a href=\"?action=list_vocabulary\">Vocabulário</a></li>"));

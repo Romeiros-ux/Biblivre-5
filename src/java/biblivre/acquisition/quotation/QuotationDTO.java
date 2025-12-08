@@ -25,6 +25,7 @@ import java.util.List;
 import biblivre.core.AbstractDTO;
 
 public class QuotationDTO extends AbstractDTO {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private int id;

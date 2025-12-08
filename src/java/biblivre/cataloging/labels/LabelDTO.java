@@ -22,6 +22,7 @@ package biblivre.cataloging.labels;
 import biblivre.core.AbstractDTO;
 
 public class LabelDTO extends AbstractDTO {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
     private int id;

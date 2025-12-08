@@ -28,7 +28,8 @@ import biblivre.circulation.user.UserDTO;
 import biblivre.core.AbstractDTO;
 
 public class LendingInfoDTO extends AbstractDTO {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private BiblioRecordDTO biblio;

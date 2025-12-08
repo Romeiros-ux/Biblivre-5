@@ -462,7 +462,7 @@ public class LendingBO extends AbstractBO {
 		
 		if (lendingInfo.size() > 0) {
 			
-			UserDTO user = lendingInfo.get(0).getUser();
+			UserDTO user = lendingInfo.getFirst().getUser();
 			
 			String nameLabel = i18n.getText("circulation.user_field.name");
 			String userName = StringEscapeUtils.escapeHtml4(user.getName());
@@ -645,7 +645,7 @@ public class LendingBO extends AbstractBO {
 		
 		if (lendingInfo.size() > 0) {
 			
-			UserDTO user = lendingInfo.get(0).getUser();
+			UserDTO user = lendingInfo.getFirst().getUser();
 			
 			String nameLabel = i18n.getText("circulation.user_field.name");
 			String userName = StringEscapeUtils.escapeHtml4(user.getName());

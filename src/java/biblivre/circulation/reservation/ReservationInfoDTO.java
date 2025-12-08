@@ -24,7 +24,8 @@ import biblivre.circulation.user.UserDTO;
 import biblivre.core.AbstractDTO;
 
 public class ReservationInfoDTO extends AbstractDTO {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private BiblioRecordDTO biblio;

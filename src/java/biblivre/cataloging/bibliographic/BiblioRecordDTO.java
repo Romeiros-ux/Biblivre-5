@@ -31,6 +31,7 @@ import biblivre.cataloging.holding.HoldingDTO;
 import biblivre.circulation.lending.LendingDTO;
 
 public class BiblioRecordDTO extends RecordDTO {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private String title;

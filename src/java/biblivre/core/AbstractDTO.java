@@ -38,6 +38,7 @@ import org.json.JSONObject;
 import biblivre.core.utils.TextUtils;
 
 public abstract class AbstractDTO implements IFJson, Serializable {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private Date created;
@@ -70,30 +71,29 @@ public abstract class AbstractDTO implements IFJson, Serializable {
 					Object value = getter.invoke(this);
 
 					if (value != null) {
-						if (value instanceof IFJson) {
-							json.putOpt(name, ((IFJson) value).toJSONObject());
-						} else if (value instanceof Collection) {
-							Collection<?> col = (Collection<?>) value;
+						if (value instanceof IFJson fJson) {
+							json.putOpt(name, fJson.toJSONObject());
+						} else if (value instanceof Collection<?> col) {
 	
 							for (Object item : col) {
 								if (item == null) {
 									continue;
 								}
 
-								if (item instanceof IFJson) {
-									json.append(name, ((IFJson) item).toJSONObject());
-								} else if (value instanceof Date) {
-									json.putOpt(name, DateFormatUtils.ISO_DATETIME_TIME_ZONE_FORMAT.format((Date) value));
-								} else if (item instanceof String) {
-									json.append(name, ((String) item).trim());
+								if (item instanceof IFJson fJson) {
+									json.append(name, fJson.toJSONObject());
+								} else if (value instanceof Date date) {
+									json.putOpt(name, DateFormatUtils.ISO_DATETIME_TIME_ZONE_FORMAT.format(date));
+								} else if (item instanceof String string) {
+									json.append(name, string.trim());
 								} else {
 									json.append(name, item);
 								}
 							}
-						} else if (value instanceof Date) {
-							json.putOpt(name, DateFormatUtils.ISO_DATETIME_TIME_ZONE_FORMAT.format((Date) value));
-						} else if (value instanceof String) {
-							json.putOpt(name, ((String) value).trim());
+						} else if (value instanceof Date date) {
+							json.putOpt(name, DateFormatUtils.ISO_DATETIME_TIME_ZONE_FORMAT.format(date));
+						} else if (value instanceof String string) {
+							json.putOpt(name, string.trim());
 						} else {
 							json.putOpt(name, value);
 						}

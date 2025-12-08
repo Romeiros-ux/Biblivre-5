@@ -8,6 +8,7 @@ import org.marc4j.marc.Record;
  * Stub Z3950Record - funcionalidade Z3950 desabilitada
  */
 public class Z3950RecordDTO extends AbstractDTO {
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	private String marc;

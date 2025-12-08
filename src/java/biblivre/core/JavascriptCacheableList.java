@@ -25,6 +25,7 @@ import java.util.LinkedList;
 import org.json.JSONArray;
 
 public class JavascriptCacheableList<T extends IFJson> extends LinkedList<T> implements IFCacheableJavascript {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private String variable;

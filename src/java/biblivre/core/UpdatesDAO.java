@@ -126,83 +126,84 @@ public class UpdatesDAO extends AbstractDAO {
 	}
 
 	public void fixUpdateTranslationFunction(Connection con) throws SQLException {
-		String sql = "CREATE OR REPLACE FUNCTION update_translation(character varying, character varying, character varying, integer) RETURNS integer \n" +
-					"    LANGUAGE plpgsql \n" +
-					"    AS $_$ \n" +
-					" DECLARE \n" +
-					"	p_language ALIAS FOR $1; \n" +
-					"	p_key ALIAS FOR $2; \n" +
-					"	p_text ALIAS FOR $3; \n" +
-					"	p_user ALIAS FOR $4; \n" +
-					" \n" +
-					"	v_schema character varying; \n" +
-					"	v_current_value TEXT; \n" +
-					"	v_global_value TEXT; \n" +
-					"	v_user_created BOOLEAN; \n" +
-					"	v_query_string character varying; \n" +
-					" BEGIN \n" +
-					"	v_schema = current_schema(); \n" +
-					"	 \n" +
-					"	IF v_schema <> 'global' THEN \n" +
-					"		-- Get the global value for this key \n" +
-					"		SELECT INTO v_global_value text FROM global.translations \n" +
-					"		WHERE language = p_language AND key = p_key; \n" +
-					" \n" +
-					"		-- If the new text is the same as the global one, \n" +
-					"		-- delete it from the current schema \n" +
-					"		IF v_global_value = p_text THEN \n" +
-					"			-- Fix for unqualified schema in functions          \n" +
-					"			EXECUTE 'DELETE FROM ' || pg_catalog.quote_ident(v_schema) || '.translations WHERE language = ' || pg_catalog.quote_literal(p_language) || ' AND key = ' || pg_catalog.quote_literal(p_key); \n" +
-					"			-- The code below will only work with multiple schemas after Postgresql 9.3 \n" +
-					"			-- DELETE FROM translations WHERE language = p_language AND key = p_key; \n" +
-					"			RETURN 1; \n" +
-					"		END IF; \n" +
-					"	END IF; \n" +
-					" \n" +
-					"	-- Get the current value for this key \n" +
-					"	 \n" +
-					"	-- Fix for unqualified schema in functions          \n" +
-					"	EXECUTE 'SELECT text FROM ' || pg_catalog.quote_ident(v_schema) || '.translations WHERE language = ' || pg_catalog.quote_literal(p_language) || ' AND key = ' || pg_catalog.quote_literal(p_key) INTO v_current_value; \n" +
-					"	-- The code below will only work with multiple schemas after Postgresql 9.3 \n" +
-					"	-- SELECT INTO v_current_value text FROM translations WHERE language = p_language AND key = p_key; \n" +
-					"	 \n" +
-					"	-- If the new text is the same as the current one, \n" +
-					"	-- return \n" +
-					"	IF v_current_value = p_text THEN \n" +
-					"		RETURN 2; \n" +
-					"	END IF; \n" +
-					" \n" +
-					"	-- If the new key isn't available in the global schema, \n" +
-					"	-- then this is a user_created key \n" +
-					"	v_user_created = v_schema <> 'global' AND v_global_value IS NULL; \n" +
-					" \n" +
-					"	-- If the current value is null then there is no \n" +
-					"	-- current translation for this key, then we should \n" +
-					"	-- insert it \n" +
-					"	IF v_current_value IS NULL THEN     \n" +
-					"		EXECUTE 'INSERT INTO ' || pg_catalog.quote_ident(v_schema) || '.translations (language, key, text, created_by, modified_by, user_created) VALUES (' || pg_catalog.quote_literal(p_language) || ', ' || pg_catalog.quote_literal(p_key) || ', ' || pg_catalog.quote_literal(p_text) || ', ' || pg_catalog.quote_literal(p_user) || ', ' || pg_catalog.quote_literal(p_user) || ', ' || pg_catalog.quote_literal(v_user_created) || ');'; \n" +
-					" \n" +
-					"		-- The code below will only work with multiple schemas after Postgresql 9.3 \n" +
-					"		--INSERT INTO translations \n" +
-					"		--(language, key, text, created_by, modified_by, user_created) \n" +
-					"		--VALUES \n" +
-					"		--(p_language, p_key, p_text, p_user, p_user, v_user_created); \n" +
-					"		 \n" +
-					"		RETURN 3; \n" +
-					"	ELSE \n" +
-					"		EXECUTE 'UPDATE ' || pg_catalog.quote_ident(v_schema) || '.translations SET text = ' || pg_catalog.quote_literal(p_text) || ', modified = now(), modified_by = ' || pg_catalog.quote_literal(p_user) || ' WHERE language = ' || pg_catalog.quote_literal(p_language) || ' AND key = ' || pg_catalog.quote_literal(p_key); \n" +
-					" \n" +
-					"		-- The code below will only work with multiple schemas after Postgresql 9.3 \n" +
-					"		--UPDATE translations \n" +
-					"		--SET text = p_text, \n" +
-					"		--modified = now(), \n" +
-					"		--modified_by = p_user \n" +
-					"		--WHERE language = p_language AND key = p_key; \n" +
-					"		 \n" +
-					"		RETURN 4; \n" +
-					"	END IF; \n" +
-					" END; \n" +
-					" $_$; ";
+		String sql = """
+					CREATE OR REPLACE FUNCTION update_translation(character varying, character varying, character varying, integer) RETURNS integer\s
+					    LANGUAGE plpgsql\s
+					    AS $_$\s
+					 DECLARE\s
+						p_language ALIAS FOR $1;\s
+						p_key ALIAS FOR $2;\s
+						p_text ALIAS FOR $3;\s
+						p_user ALIAS FOR $4;\s
+					\s
+						v_schema character varying;\s
+						v_current_value TEXT;\s
+						v_global_value TEXT;\s
+						v_user_created BOOLEAN;\s
+						v_query_string character varying;\s
+					 BEGIN\s
+						v_schema = current_schema();\s
+						\s
+						IF v_schema <> 'global' THEN\s
+							-- Get the global value for this key\s
+							SELECT INTO v_global_value text FROM global.translations\s
+							WHERE language = p_language AND key = p_key;\s
+					\s
+							-- If the new text is the same as the global one,\s
+							-- delete it from the current schema\s
+							IF v_global_value = p_text THEN\s
+								-- Fix for unqualified schema in functions         \s
+								EXECUTE 'DELETE FROM ' || pg_catalog.quote_ident(v_schema) || '.translations WHERE language = ' || pg_catalog.quote_literal(p_language) || ' AND key = ' || pg_catalog.quote_literal(p_key);\s
+								-- The code below will only work with multiple schemas after Postgresql 9.3\s
+								-- DELETE FROM translations WHERE language = p_language AND key = p_key;\s
+								RETURN 1;\s
+							END IF;\s
+						END IF;\s
+					\s
+						-- Get the current value for this key\s
+						\s
+						-- Fix for unqualified schema in functions         \s
+						EXECUTE 'SELECT text FROM ' || pg_catalog.quote_ident(v_schema) || '.translations WHERE language = ' || pg_catalog.quote_literal(p_language) || ' AND key = ' || pg_catalog.quote_literal(p_key) INTO v_current_value;\s
+						-- The code below will only work with multiple schemas after Postgresql 9.3\s
+						-- SELECT INTO v_current_value text FROM translations WHERE language = p_language AND key = p_key;\s
+						\s
+						-- If the new text is the same as the current one,\s
+						-- return\s
+						IF v_current_value = p_text THEN\s
+							RETURN 2;\s
+						END IF;\s
+					\s
+						-- If the new key isn't available in the global schema,\s
+						-- then this is a user_created key\s
+						v_user_created = v_schema <> 'global' AND v_global_value IS NULL;\s
+					\s
+						-- If the current value is null then there is no\s
+						-- current translation for this key, then we should\s
+						-- insert it\s
+						IF v_current_value IS NULL THEN    \s
+							EXECUTE 'INSERT INTO ' || pg_catalog.quote_ident(v_schema) || '.translations (language, key, text, created_by, modified_by, user_created) VALUES (' || pg_catalog.quote_literal(p_language) || ', ' || pg_catalog.quote_literal(p_key) || ', ' || pg_catalog.quote_literal(p_text) || ', ' || pg_catalog.quote_literal(p_user) || ', ' || pg_catalog.quote_literal(p_user) || ', ' || pg_catalog.quote_literal(v_user_created) || ');';\s
+					\s
+							-- The code below will only work with multiple schemas after Postgresql 9.3\s
+							--INSERT INTO translations\s
+							--(language, key, text, created_by, modified_by, user_created)\s
+							--VALUES\s
+							--(p_language, p_key, p_text, p_user, p_user, v_user_created);\s
+							\s
+							RETURN 3;\s
+						ELSE\s
+							EXECUTE 'UPDATE ' || pg_catalog.quote_ident(v_schema) || '.translations SET text = ' || pg_catalog.quote_literal(p_text) || ', modified = now(), modified_by = ' || pg_catalog.quote_literal(p_user) || ' WHERE language = ' || pg_catalog.quote_literal(p_language) || ' AND key = ' || pg_catalog.quote_literal(p_key);\s
+					\s
+							-- The code below will only work with multiple schemas after Postgresql 9.3\s
+							--UPDATE translations\s
+							--SET text = p_text,\s
+							--modified = now(),\s
+							--modified_by = p_user\s
+							--WHERE language = p_language AND key = p_key;\s
+							\s
+							RETURN 4;\s
+						END IF;\s
+					 END;\s
+					 $_$; """;
 
 		String sql2 = "ALTER FUNCTION global.update_translation(character varying, character varying, character varying, integer) OWNER TO biblivre;"; 
 
@@ -212,52 +213,53 @@ public class UpdatesDAO extends AbstractDAO {
 	}
 
 	public void fixUpdateUserFunction(Connection con) throws SQLException {
-		String sql = "CREATE OR REPLACE FUNCTION update_user_value(integer, character varying, character varying, character varying) RETURNS integer \n" +
-					"  LANGUAGE plpgsql \n" +
-					"    AS $_$ \n" +
-					" DECLARE \n" +
-					"	p_id ALIAS FOR $1; \n" +
-					"	p_key ALIAS FOR $2; \n" +
-					"	p_value ALIAS FOR $3; \n" +
-					"	p_ascii ALIAS FOR $4; \n" +
-					" \n" +
-					"	v_schema character varying; \n" +
-					"	v_current_value TEXT; \n" +
-					" BEGIN \n" +
-					"	v_schema = current_schema(); \n" +
-					" \n" +
-					"	IF v_schema = 'global' THEN \n" +
-					"		-- Can't save user fields in global schema \n" +
-					"		RETURN 1; \n" +
-					"	END IF; \n" +
-					" \n" +
-					"	-- Get the current value for this key \n" +
-					"	EXECUTE 'SELECT value FROM ' || pg_catalog.quote_ident(v_schema) || '.users_values WHERE user_id = ' || pg_catalog.quote_literal(p_id) || ' AND key = ' || pg_catalog.quote_literal(p_key) INTO v_current_value; \n" +
-					"	-- SELECT INTO v_current_value value FROM users_values WHERE user_id = p_id AND key = p_key; \n" +
-					" \n" +
-					"	-- If the new value is the same as the current one, \n" +
-					"	-- return \n" +
-					"	IF v_current_value = p_value THEN \n" +
-					"		RETURN 2; \n" +
-					"	END IF; \n" +
-					" \n" +
-					"	-- If the current value is null then there is no \n" +
-					"	-- current value for this key, then we should \n" +
-					"	-- insert it \n" +
-					"	IF v_current_value IS NULL THEN \n" +
-					"		-- RAISE LOG 'inserting into schema %', v_schema; \n" +
-					"		EXECUTE 'INSERT INTO ' || pg_catalog.quote_ident(v_schema) || '.users_values (user_id, key, value, ascii) VALUES (' || pg_catalog.quote_literal(p_id) || ', ' || pg_catalog.quote_literal(p_key) || ', ' || pg_catalog.quote_literal(p_value) || ', ' || pg_catalog.quote_literal(p_ascii) || ');'; \n" +
-					"		--INSERT INTO users_values (user_id, key, value, ascii) VALUES (p_id, p_key, p_value, p_ascii); \n" +
-					"		 \n" +
-					"		RETURN 3; \n" +
-					"	ELSE \n" +
-					"		EXECUTE 'UPDATE ' || pg_catalog.quote_ident(v_schema) || '.users_values SET value = ' || pg_catalog.quote_literal(p_value) || ', ascii = ' || pg_catalog.quote_literal(p_ascii) || ' WHERE user_id = ' || pg_catalog.quote_literal(p_id) || ' AND key = ' || pg_catalog.quote_literal(p_key); \n" +
-					"		-- UPDATE users_values SET value = p_value, ascii = p_ascii WHERE user_id = p_id AND key = p_key; \n" +
-					" \n" +
-					"		RETURN 4; \n" +
-					"	END IF; \n" +
-					" END; \n" +
-					"$_$; ";
+		String sql = """
+					CREATE OR REPLACE FUNCTION update_user_value(integer, character varying, character varying, character varying) RETURNS integer\s
+					  LANGUAGE plpgsql\s
+					    AS $_$\s
+					 DECLARE\s
+						p_id ALIAS FOR $1;\s
+						p_key ALIAS FOR $2;\s
+						p_value ALIAS FOR $3;\s
+						p_ascii ALIAS FOR $4;\s
+					\s
+						v_schema character varying;\s
+						v_current_value TEXT;\s
+					 BEGIN\s
+						v_schema = current_schema();\s
+					\s
+						IF v_schema = 'global' THEN\s
+							-- Can't save user fields in global schema\s
+							RETURN 1;\s
+						END IF;\s
+					\s
+						-- Get the current value for this key\s
+						EXECUTE 'SELECT value FROM ' || pg_catalog.quote_ident(v_schema) || '.users_values WHERE user_id = ' || pg_catalog.quote_literal(p_id) || ' AND key = ' || pg_catalog.quote_literal(p_key) INTO v_current_value;\s
+						-- SELECT INTO v_current_value value FROM users_values WHERE user_id = p_id AND key = p_key;\s
+					\s
+						-- If the new value is the same as the current one,\s
+						-- return\s
+						IF v_current_value = p_value THEN\s
+							RETURN 2;\s
+						END IF;\s
+					\s
+						-- If the current value is null then there is no\s
+						-- current value for this key, then we should\s
+						-- insert it\s
+						IF v_current_value IS NULL THEN\s
+							-- RAISE LOG 'inserting into schema %', v_schema;\s
+							EXECUTE 'INSERT INTO ' || pg_catalog.quote_ident(v_schema) || '.users_values (user_id, key, value, ascii) VALUES (' || pg_catalog.quote_literal(p_id) || ', ' || pg_catalog.quote_literal(p_key) || ', ' || pg_catalog.quote_literal(p_value) || ', ' || pg_catalog.quote_literal(p_ascii) || ');';\s
+							--INSERT INTO users_values (user_id, key, value, ascii) VALUES (p_id, p_key, p_value, p_ascii);\s
+							\s
+							RETURN 3;\s
+						ELSE\s
+							EXECUTE 'UPDATE ' || pg_catalog.quote_ident(v_schema) || '.users_values SET value = ' || pg_catalog.quote_literal(p_value) || ', ascii = ' || pg_catalog.quote_literal(p_ascii) || ' WHERE user_id = ' || pg_catalog.quote_literal(p_id) || ' AND key = ' || pg_catalog.quote_literal(p_key);\s
+							-- UPDATE users_values SET value = p_value, ascii = p_ascii WHERE user_id = p_id AND key = p_key;\s
+					\s
+							RETURN 4;\s
+						END IF;\s
+					 END;\s
+					$_$; """;
 
 		String sql2 = "ALTER FUNCTION global.update_user_value(integer, character varying, character varying, character varying) OWNER TO biblivre;"; 
 

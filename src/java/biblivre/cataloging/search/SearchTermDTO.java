@@ -33,6 +33,7 @@ import biblivre.core.AbstractDTO;
 import biblivre.core.utils.TextUtils;
 
 public class SearchTermDTO extends AbstractDTO {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private Set<String> terms;

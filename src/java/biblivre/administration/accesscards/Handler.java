@@ -116,7 +116,7 @@ public class Handler extends AbstractHandler {
 		} else {
 			LinkedList<AccessCardDTO> list = bo.saveCardList(prefix, suffix, start, end, request.getLoggedUserId(), status);
 			if (list != null) {
-				returnDto = list.get(0);
+				returnDto = list.getFirst();
 				success = true;
 			} else {
 				success = false;

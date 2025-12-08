@@ -49,6 +49,7 @@ import biblivre.core.utils.FileIOUtils;
 
 public final class SchemaServlet extends HttpServlet {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	@Override

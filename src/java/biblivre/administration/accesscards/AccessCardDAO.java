@@ -50,7 +50,7 @@ public class AccessCardDAO extends AbstractDAO {
 			return null;
 		}
 		
-		return list.get(0);
+		return list.getFirst();
 	}
 		
 	public List<AccessCardDTO> get(List<String> codes, List<AccessCardStatus> status) {
@@ -241,7 +241,7 @@ public class AccessCardDAO extends AbstractDAO {
 			
 			ResultSet keys = pst.getGeneratedKeys();
 			if (keys.next()) {
-				AccessCardDTO dto = cardList.get(0);
+				AccessCardDTO dto = cardList.getFirst();
 				dto.setId(keys.getInt(1));
 			}
 		} catch (Exception e) {

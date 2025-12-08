@@ -38,6 +38,7 @@ import biblivre.core.translations.TranslationsMap;
 import biblivre.core.utils.Constants;
 
 public class LayoutHead extends BodyTagSupport {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private String schema;

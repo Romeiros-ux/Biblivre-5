@@ -29,6 +29,7 @@ import biblivre.core.utils.NaturalOrderComparator;
 import biblivre.marc.MaterialType;
 
 public class HoldingDTO extends RecordDTO implements Comparable<HoldingDTO> {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
     private Integer recordId;

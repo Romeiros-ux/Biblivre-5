@@ -220,8 +220,8 @@ public class XML {
 
 // attribute = value
 
-                if (token instanceof String) {
-                    string = (String)token;
+                if (token instanceof String string1) {
+                    string = string1;
                     token = x.nextToken();
                     if (token == EQ) {
                         token = x.nextToken();
@@ -229,7 +229,7 @@ public class XML {
                             throw x.syntaxError("Missing value");
                         }
                         jsonobject.accumulate(string,
-                                XML.stringToValue((String)token));
+                                XML.stringToValue(string1));
                         token = null;
                     } else {
                         jsonobject.accumulate(string, "");
@@ -258,8 +258,8 @@ public class XML {
                                 throw x.syntaxError("Unclosed tag " + tagName);
                             }
                             return false;
-                        } else if (token instanceof String) {
-                            string = (String)token;
+                        } else if (token instanceof String string1) {
+                            string = string1;
                             if (string.length() > 0) {
                                 jsonobject.accumulate("content",
                                         XML.stringToValue(string));
@@ -316,14 +316,14 @@ public class XML {
         try {
             char initial = string.charAt(0);
             if (initial == '-' || (initial >= '0' && initial <= '9')) {
-                Long value = new Long(string);
+                Long value = Long.valueOf(string);
                 if (value.toString().equals(string)) {
                     return value;
                 }
             }
         }  catch (Exception ignore) {
             try {
-                Double value = new Double(string);
+                Double value = Double.valueOf(string);
                 if (value.toString().equals(string)) {
                     return value;
                 }
@@ -387,7 +387,7 @@ public class XML {
         int                 length;
         String              string;
         Object              value;
-        if (object instanceof JSONObject) {
+        if (object instanceof JSONObject nObject) {
 
 // Emit <tagName>
 
@@ -399,7 +399,7 @@ public class XML {
 
 // Loop thru the keys.
 
-            jo = (JSONObject)object;
+            jo = nObject;
             keys = jo.keys();
             while (keys.hasNext()) {
                 key = keys.next();
@@ -407,13 +407,13 @@ public class XML {
                 if (value == null) {
                     value = "";
                 }
-                string = value instanceof String ? (String)value : null;
+                string = value instanceof String s ? s : null;
 
 // Emit content in body
 
                 if ("content".equals(key)) {
-                    if (value instanceof JSONArray) {
-                        ja = (JSONArray)value;
+                    if (value instanceof JSONArray array) {
+                        ja = array;
                         length = ja.length();
                         for (i = 0; i < length; i += 1) {
                             if (i > 0) {
@@ -427,8 +427,8 @@ public class XML {
 
 // Emit an array of similar keys
 
-                } else if (value instanceof JSONArray) {
-                    ja = (JSONArray)value;
+                } else if (value instanceof JSONArray array) {
+                    ja = array;
                     length = ja.length();
                     for (i = 0; i < length; i += 1) {
                         value = ja.get(i);
@@ -472,8 +472,8 @@ public class XML {
             if (object.getClass().isArray()) {
                 object = new JSONArray(object);
             }
-            if (object instanceof JSONArray) {
-                ja = (JSONArray)object;
+            if (object instanceof JSONArray array) {
+                ja = array;
                 length = ja.length();
                 for (i = 0; i < length; i += 1) {
                     sb.append(toString(ja.opt(i), tagName == null ? "array" : tagName));

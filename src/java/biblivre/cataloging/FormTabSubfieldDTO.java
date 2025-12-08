@@ -26,7 +26,8 @@ import biblivre.cataloging.enums.AutocompleteType;
 import biblivre.core.AbstractDTO;
 
 public class FormTabSubfieldDTO extends AbstractDTO {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 	
 	private String datafield;

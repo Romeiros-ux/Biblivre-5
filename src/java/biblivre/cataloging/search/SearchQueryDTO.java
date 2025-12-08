@@ -41,6 +41,7 @@ import biblivre.core.utils.TextUtils;
 import biblivre.marc.MaterialType;
 
 public class SearchQueryDTO extends AbstractDTO {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private SearchMode searchMode;
@@ -224,7 +225,7 @@ public class SearchQueryDTO extends AbstractDTO {
 			return new HashSet<String>();
 		}
 		
-		return this.terms.get(0).getTerms();
+		return this.terms.getFirst().getTerms();
 	}
 	
 	public void addTerm(SearchTermDTO dto) {

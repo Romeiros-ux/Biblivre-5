@@ -259,8 +259,8 @@ public class ExtendedRequest extends HttpServletRequestWrapper {
 	public int getLoggedUserId() {
 		Object user = this.getSessionAttribute(this.getSchema(), "logged_user");
 
-		if (user != null && user instanceof LoginDTO) {
-			return ((LoginDTO) user).getId();
+		if (user != null && user instanceof LoginDTO tO) {
+			return tO.getId();
 		}
 
 		return 0;

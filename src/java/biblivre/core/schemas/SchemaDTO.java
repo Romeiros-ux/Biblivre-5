@@ -24,6 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 import biblivre.core.AbstractDTO;
 
 public class SchemaDTO extends AbstractDTO implements Comparable<SchemaDTO> {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private String schema;

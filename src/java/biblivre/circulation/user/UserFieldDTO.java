@@ -22,6 +22,7 @@ package biblivre.circulation.user;
 import biblivre.core.AbstractDTO;
 
 public class UserFieldDTO extends AbstractDTO implements Comparable<UserFieldDTO> {
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private String key;

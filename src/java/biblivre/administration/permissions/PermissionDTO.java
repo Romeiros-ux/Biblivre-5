@@ -29,7 +29,8 @@ import biblivre.core.AbstractDTO;
 import biblivre.login.LoginDTO;
 
 public class PermissionDTO extends AbstractDTO {
-	
+
+	@Serial
 	private static final long serialVersionUID = 1L;
 
     private List<String> permissions;

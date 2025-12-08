@@ -31,6 +31,7 @@ import biblivre.core.AbstractDTO;
 
 public class FormTabDatafieldDTO extends AbstractDTO implements Comparable<BriefTabFieldFormatDTO> {
 
+	@Serial
 	private static final long serialVersionUID = 1L;
 
 	private String datafield;

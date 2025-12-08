@@ -134,7 +134,7 @@ public class ImportBO extends AbstractBO {
 					}
 					
 					Collections.sort(list);
-					dto = list.get(0);
+					dto = list.getFirst();
 					
 					break;
 					
