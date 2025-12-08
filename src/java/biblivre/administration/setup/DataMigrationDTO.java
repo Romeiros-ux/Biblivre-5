@@ -26,7 +26,7 @@ import java.util.TreeSet;
 import biblivre.core.AbstractDTO;
 
 public class DataMigrationDTO extends AbstractDTO {
-	@Serial
+	@java.io.Serial
 	private static final long serialVersionUID = 1L;
 
 	private volatile String dataSourceName;

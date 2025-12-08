@@ -41,7 +41,7 @@ import biblivre.core.utils.TextUtils;
 import biblivre.marc.MaterialType;
 
 public class SearchQueryDTO extends AbstractDTO {
-	@Serial
+	@java.io.Serial
 	private static final long serialVersionUID = 1L;
 
 	private SearchMode searchMode;

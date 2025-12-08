@@ -22,7 +22,7 @@ package biblivre.core.translations;
 import biblivre.core.AbstractDTO;
 
 public class TranslationDTO extends AbstractDTO {
-	@Serial
+	@java.io.Serial
 	private static final long serialVersionUID = 1L;
 
 	private String language;

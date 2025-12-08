@@ -27,7 +27,7 @@ import org.json.JSONObject;
 import org.json.JSONString;
 
 public class Pair<L, R> implements Serializable, JSONString {
-	@Serial
+	@java.io.Serial
 	private static final long serialVersionUID = 1L;
 
 	private final L left;

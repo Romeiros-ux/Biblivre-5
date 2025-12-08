@@ -34,7 +34,7 @@ import biblivre.core.utils.Constants;
 import biblivre.core.utils.Pair;
 
 public class RestoreDTO extends AbstractDTO implements Comparable<RestoreDTO> {
-	@Serial
+	@java.io.Serial
 	private static final long serialVersionUID = 1L;
 	
 	private Map<String, Pair<String, String>> schemas;

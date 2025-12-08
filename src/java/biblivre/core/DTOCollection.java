@@ -25,7 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DTOCollection<T extends AbstractDTO> extends LinkedList<T> implements IFJson  {
-	@Serial
+	@java.io.Serial
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;

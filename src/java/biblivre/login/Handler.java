@@ -21,7 +21,7 @@ package biblivre.login;
 
 import java.util.Enumeration;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;

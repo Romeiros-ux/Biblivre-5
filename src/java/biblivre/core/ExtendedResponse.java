@@ -21,8 +21,8 @@ package biblivre.core;
 
 import java.io.IOException;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponseWrapper;
 
 public class ExtendedResponse extends HttpServletResponseWrapper {
 	
@@ -62,7 +62,7 @@ public class ExtendedResponse extends HttpServletResponseWrapper {
 
     @Override
     public void setStatus(int sc, String msg) {
-    	super.setStatus(sc, msg);
+    	super.setStatus(sc);
     	this.httpStatus = sc;
     }
 	

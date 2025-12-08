@@ -22,7 +22,7 @@ package biblivre.acquisition.quotation;
 import biblivre.core.AbstractDTO;
 
 public class RequestQuotationDTO extends AbstractDTO {
-	@Serial
+	@java.io.Serial
 	private static final long serialVersionUID = 1L;
 
 	private int requestId;

@@ -22,7 +22,7 @@ package biblivre.core.controllers;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.ServletException;
+import jakarta.servlet.ServletException;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;

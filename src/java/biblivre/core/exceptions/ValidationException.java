@@ -28,7 +28,7 @@ import biblivre.core.utils.Pair;
 
 
 public class ValidationException extends RuntimeException {
-	@Serial
+	@java.io.Serial
 	private static final long serialVersionUID = 1L;
 	private Logger logger = Logger.getLogger(this.getClass());
 

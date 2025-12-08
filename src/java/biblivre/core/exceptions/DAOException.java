@@ -24,7 +24,7 @@ import java.sql.BatchUpdateException;
 import org.apache.log4j.Logger;
 
 public class DAOException extends RuntimeException {
-	@Serial
+	@java.io.Serial
 	private static final long serialVersionUID = 1L;
 	private Logger logger = Logger.getLogger(this.getClass());
 	

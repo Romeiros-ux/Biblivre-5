@@ -26,7 +26,7 @@ import biblivre.acquisition.quotation.RequestQuotationDTO;
 import biblivre.core.AbstractDTO;
 
 public class OrderDTO extends AbstractDTO {
-	@Serial
+	@java.io.Serial
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;

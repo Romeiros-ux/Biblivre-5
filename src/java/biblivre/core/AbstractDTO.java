@@ -38,7 +38,7 @@ import org.json.JSONObject;
 import biblivre.core.utils.TextUtils;
 
 public abstract class AbstractDTO implements IFJson, Serializable {
-	@Serial
+	@java.io.Serial
 	private static final long serialVersionUID = 1L;
 
 	private Date created;

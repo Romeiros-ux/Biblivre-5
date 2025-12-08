@@ -24,7 +24,7 @@ import org.json.JSONObject;
 import biblivre.core.AbstractDTO;
 
 public class BriefTabFieldFormatDTO extends AbstractDTO implements Comparable<BriefTabFieldFormatDTO> {
-	@Serial
+	@java.io.Serial
 	private static final long serialVersionUID = 1L;
 
 	private String datafieldTag;

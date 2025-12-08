@@ -31,7 +31,7 @@ import biblivre.core.exceptions.ValidationException;
 import biblivre.core.utils.TextUtils;
 
 public class UserSearchDTO extends AbstractDTO {
-	@Serial
+	@java.io.Serial
 	private static final long serialVersionUID = 1L;
 
 	private SearchMode searchMode;

@@ -33,7 +33,7 @@ import biblivre.core.utils.Constants;
 
 public class TranslationsMap extends HashMap<String, TranslationDTO> implements IFCacheableJavascript {
 	private Logger logger = Logger.getLogger(this.getClass());
-	@Serial
+	@java.io.Serial
 	private static final long serialVersionUID = 1L;
 
 	private String schema;

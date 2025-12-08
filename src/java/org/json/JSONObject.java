@@ -1507,8 +1507,8 @@ public class JSONObject {
             } catch (Exception e) {
                 throw new JSONException(e);
             }
-            if (object instanceof String string) {
-                return string;
+            if (object instanceof String result) {
+                return result;
             }
             throw new JSONException("Bad value from toJSONString: " + object);
         }

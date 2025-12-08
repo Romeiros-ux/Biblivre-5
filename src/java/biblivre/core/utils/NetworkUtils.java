@@ -25,7 +25,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.Enumeration;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 public class NetworkUtils {
 	public static boolean isLocalRequest(HttpServletRequest request) throws UnknownHostException {

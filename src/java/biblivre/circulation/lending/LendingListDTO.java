@@ -28,7 +28,7 @@ import biblivre.core.AbstractDTO;
 
 public class LendingListDTO extends AbstractDTO {
 
-	@Serial
+	@java.io.Serial
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;

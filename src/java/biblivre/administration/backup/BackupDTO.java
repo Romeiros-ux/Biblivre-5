@@ -31,7 +31,7 @@ import biblivre.core.AbstractDTO;
 import biblivre.core.utils.Pair;
 
 public class BackupDTO extends AbstractDTO {
-	@Serial
+	@java.io.Serial
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;

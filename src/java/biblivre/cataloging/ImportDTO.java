@@ -31,7 +31,7 @@ import biblivre.core.AbstractDTO;
 import biblivre.core.IFJson;
 
 public class ImportDTO extends AbstractDTO implements Comparable<ImportDTO>, IFJson {
-	@Serial
+	@java.io.Serial
 	private static final long serialVersionUID = 1L;
 
 	/**

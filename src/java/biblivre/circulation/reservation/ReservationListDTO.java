@@ -27,7 +27,7 @@ import biblivre.core.AbstractDTO;
 
 public class ReservationListDTO extends AbstractDTO {
 
-	@Serial
+	@java.io.Serial
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
