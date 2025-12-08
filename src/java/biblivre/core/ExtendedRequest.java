@@ -274,12 +274,11 @@ public class ExtendedRequest extends HttpServletRequestWrapper {
 			this.multiPartFiles = new HashMap<String, MemoryFile>();
 			
 			try {
-				DiskFileItemFactory.Builder factory = DiskFileItemFactory.builder();
-				JakartaServletFileUpload<DiskFileItemFactory.Builder, DiskFileItemFactory> upload = 
-					new JakartaServletFileUpload<>(factory.get());
-				List<FileItem> items = upload.parseRequest(this);
+				DiskFileItemFactory factory = DiskFileItemFactory.builder().get();
+				JakartaServletFileUpload upload = new JakartaServletFileUpload(factory);
+				List<FileItem<?>> items = upload.parseRequest(this);
 
-				for (FileItem item : items) {
+				for (FileItem<?> item : items) {
 					if (item.isFormField()) {
 						this.multiPartParameters.put(item.getFieldName(), item.getString());
 					} else {
