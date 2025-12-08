@@ -47,7 +47,8 @@ import biblivre.core.utils.FileIOUtils;
 import biblivre.core.utils.Pair;
 import biblivre.digitalmedia.DigitalMediaDAO;
 import biblivre.digitalmedia.DigitalMediaDTO;
-import br.org.biblivre.z3950server.utils.TextUtils;
+// Z3950 desabilitado
+// import br.org.biblivre.z3950server.utils.TextUtils;
 
 public class BackupBO extends AbstractBO {
 	private BackupDAO dao;
@@ -296,7 +297,9 @@ public class BackupBO extends AbstractBO {
 		for (DigitalMediaDTO dto : list) {
 			DatabaseFile file = dao.load(dto.getId(), dto.getName());
 
-			File destination = new File(path, dto.getId() + "_" + TextUtils.removeNonLettersOrDigits(dto.getName(), "-"));
+			// Z3950 desabilitado - usando método local
+			String sanitizedName = dto.getName().replaceAll("[^a-zA-Z0-9]", "-");
+			File destination = new File(path, dto.getId() + "_" + sanitizedName);
 			FileOutputStream writer = new FileOutputStream(destination);
 
 			file.copy(writer);

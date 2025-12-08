@@ -18,7 +18,13 @@ RUN mvn install:install-file -Dfile=a2j-2.0.4.jar -DgroupId=org.jzkit -Dartifact
     mvn install:install-file -Dfile=marc4j-2.5.1.beta.jar -DgroupId=org.marc4j -DartifactId=marc4j -Dversion=2.5.1.beta -Dpackaging=jar && \
     mvn install:install-file -Dfile=z3950server-1.0.2.jar -DgroupId=br.org.biblivre -DartifactId=z3950server -Dversion=1.0.2 -Dpackaging=jar && \
     mvn install:install-file -Dfile=itext-4.2.1.jar -DgroupId=com.lowagie -DartifactId=itext -Dversion=4.2.1 -Dpackaging=jar && \
-    mvn install:install-file -Dfile=normalizer-2.6.jar -DgroupId=com.ibm.icu -DartifactId=normalizer -Dversion=2.6 -Dpackaging=jar
+    mvn install:install-file -Dfile=normalizer-2.6.jar -DgroupId=com.ibm.icu -DartifactId=normalizer -Dversion=2.6 -Dpackaging=jar && \
+    mvn install:install-file -Dfile=spring/spring-context-3.2.18.RELEASE.jar -DgroupId=org.springframework -DartifactId=spring-context -Dversion=3.2.18.RELEASE -Dpackaging=jar && \
+    mvn install:install-file -Dfile=spring/spring-core-3.2.18.RELEASE.jar -DgroupId=org.springframework -DartifactId=spring-core -Dversion=3.2.18.RELEASE -Dpackaging=jar && \
+    mvn install:install-file -Dfile=spring/spring-beans-3.2.18.RELEASE.jar -DgroupId=org.springframework -DartifactId=spring-beans -Dversion=3.2.18.RELEASE -Dpackaging=jar && \
+    mvn install:install-file -Dfile=spring/spring-aop-3.2.18.RELEASE.jar -DgroupId=org.springframework -DartifactId=spring-aop -Dversion=3.2.18.RELEASE -Dpackaging=jar && \
+    mvn install:install-file -Dfile=spring/spring-expression-3.2.18.RELEASE.jar -DgroupId=org.springframework -DartifactId=spring-expression -Dversion=3.2.18.RELEASE -Dpackaging=jar && \
+    mvn install:install-file -Dfile=spring/commons-logging-1.2.jar -DgroupId=commons-logging -DartifactId=commons-logging -Dversion=1.2 -Dpackaging=jar
 
 # Download dependencies (cached layer if pom.xml doesn't change)
 WORKDIR /app

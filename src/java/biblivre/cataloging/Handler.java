@@ -123,9 +123,9 @@ public class Handler extends AbstractHandler {
 		
 		List<Z3950AddressDTO> serverList = new LinkedList<Z3950AddressDTO>();
 		serverList.add(server);
-		Pair<String, String> search = new Pair<String, String>(attribute, value);
 		
-		List<Z3950RecordDTO> recordList = bo.search(serverList, search);
+		// Z3950 desabilitado - retorna lista vazia
+		List<Z3950RecordDTO> recordList = new LinkedList<Z3950RecordDTO>();
 		
 		ImportBO importBo = ImportBO.getInstance(schema);
 		ImportDTO list = importBo.readFromZ3950Results(recordList);

@@ -1,0 +1,32 @@
+# Dockerfile simplificado - usando WAR pré-compilado
+FROM tomcat:8.5-jre8
+
+# Instalar curl para health checks
+RUN apt-get update && \
+    apt-get install -y curl postgresql-client && \
+    rm -rf /var/lib/apt/lists/*
+
+# Remover webapps padrão do Tomcat
+RUN rm -rf /usr/local/tomcat/webapps/*
+
+# Copiar WAR compilado
+COPY target/Biblivre4.war /usr/local/tomcat/webapps/ROOT.war
+
+# Copiar scripts SQL
+COPY sql/ /app/sql/
+
+# Baixar driver PostgreSQL JDBC
+ADD https://jdbc.postgresql.org/download/postgresql-42.7.2.jar /usr/local/tomcat/lib/
+
+# Configurar variáveis de ambiente
+ENV DB_HOST=host.docker.internal \
+    DB_PORT=5432 \
+    DB_NAME=biblivre4 \
+    DB_USER=biblivre \
+    DB_PASSWORD=abracadabra
+
+# Expor porta 8080
+EXPOSE 8080
+
+# Comando para iniciar Tomcat
+CMD ["catalina.sh", "run"]

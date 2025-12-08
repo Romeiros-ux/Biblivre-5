@@ -201,11 +201,14 @@ public class ImportBO extends AbstractBO {
 	
 	public ImportDTO readFromZ3950Results(List<Z3950RecordDTO> recordList) {
 		ImportDTO dto = new ImportDTO();
-		BiblioRecordBO bbo = BiblioRecordBO.getInstance(this.getSchema());
+		// Z3950 desabilitado - retorna objeto vazio
+		return dto;
+		/* BiblioRecordBO bbo = BiblioRecordBO.getInstance(this.getSchema());
 		for (Z3950RecordDTO z3950Dto : recordList) {
 			dto.incrementFound();
 			try {
-				BiblioRecordDTO brdto = z3950Dto.getRecord();
+				BiblioRecordDTO brdto = new BiblioRecordDTO();
+				brdto.setRecord(z3950Dto.getRecord());
 
 				if (brdto != null) {
 					bbo.populateDetails(brdto, RecordBO.MARC_INFO);
@@ -219,7 +222,7 @@ public class ImportBO extends AbstractBO {
 			}
 		}
 
-		return dto;
+		return dto; */
 	}
 	
 	public RecordDTO dtoFromRecord(Record record) {

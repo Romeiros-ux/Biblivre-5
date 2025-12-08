@@ -19,12 +19,13 @@
  ******************************************************************************/
 package biblivre.core;
 
-import br.org.biblivre.z3950server.Z3950ServerBO;
+// Z3950 desabilitado
+// import br.org.biblivre.z3950server.Z3950ServerBO;
 
 public class BiblivreInitializer {
 
 	private static boolean initialized = false;
-	public static Z3950ServerBO Z3950server = null;
+	// public static Z3950ServerBO Z3950server = null;
 
 	public synchronized static void initialize() {
 		if (!BiblivreInitializer.initialized) {
@@ -45,14 +46,16 @@ public class BiblivreInitializer {
 	}
 
 	public synchronized static void destroy() {
-		if (BiblivreInitializer.Z3950server != null) {
-			BiblivreInitializer.Z3950server.stopServer();
-		}
+		// Z3950 desabilitado
+		// if (BiblivreInitializer.Z3950server != null) {
+		// 	BiblivreInitializer.Z3950server.stopServer();
+		// }
 	}
 
 	public synchronized static void reloadZ3950Server() {
-		if (BiblivreInitializer.Z3950server != null) {
-			BiblivreInitializer.Z3950server.reloadServer();
-		}
+		// Z3950 desabilitado
+		// if (BiblivreInitializer.Z3950server != null) {
+		// 	BiblivreInitializer.Z3950server.reloadServer();
+		// }
 	}
 }
