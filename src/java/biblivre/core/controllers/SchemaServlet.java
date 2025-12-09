@@ -192,9 +192,11 @@ public final class SchemaServlet extends HttpServlet {
 		final String realPath;
 
 		if (path.contains("static/")) {
-			realPath = path.substring(path.lastIndexOf("static/"));
+			String extracted = path.substring(path.lastIndexOf("static/"));
+			realPath = extracted.startsWith("/") ? extracted : "/" + extracted;
 		} else {
-			realPath = path.substring(path.lastIndexOf("extra/"));
+			String extracted = path.substring(path.lastIndexOf("extra/"));
+			realPath = extracted.startsWith("/") ? extracted : "/" + extracted;
 		}
 
 		if (realPath.endsWith(".i18n.js") || realPath.endsWith(".form.js") || realPath.endsWith(".user_fields.js")) {

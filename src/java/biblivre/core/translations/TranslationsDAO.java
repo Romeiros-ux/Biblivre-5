@@ -54,8 +54,8 @@ public class TranslationsDAO extends AbstractDAO {
 			StringBuilder sql = new StringBuilder();
 
 			sql.append("SELECT K.language, K.key, coalesce(T.text, '') as text, T.created, T.created_by, T.modified, T.modified_by, T.user_created FROM ( ");
-			sql.append("SELECT DISTINCT B.language, A.key FROM (SELECT DISTINCT key FROM translations UNION SELECT DISTINCT key FROM global.translations) A ");
-			sql.append("CROSS JOIN (SELECT DISTINCT language FROM translations UNION SELECT DISTINCT language FROM global.translations) B ");
+			sql.append("SELECT DISTINCT B.language, A.key FROM (SELECT DISTINCT key FROM translations) A ");
+			sql.append("CROSS JOIN (SELECT DISTINCT language FROM translations) B ");
 			sql.append(") K LEFT JOIN translations T ON T.key = K.key AND T.language = K.language ");
 			
 			if (StringUtils.isNotBlank(language)) {
@@ -99,7 +99,7 @@ public class TranslationsDAO extends AbstractDAO {
 			con.setAutoCommit(false);
 
 			if (translations != null) {
-				CallableStatement function = con.prepareCall("{ call global.update_translation(?, ?, ?, ?) }");
+				CallableStatement function = con.prepareCall("{ call update_translation(?, ?, ?, ?) }");
 			
 				for (String language : translations.keySet()) {
 					Map<String, String> translation = translations.get(language);

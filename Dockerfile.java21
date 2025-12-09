@@ -47,8 +47,8 @@ FROM tomcat:10.1-jdk21
 # Remove default Tomcat applications
 RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Copy built WAR file
-COPY --from=build /app/target/biblivre4.war /usr/local/tomcat/webapps/ROOT.war
+# Copy built WAR file (note: finalName in pom.xml is "Biblivre4" with capital B)
+COPY --from=build /app/target/Biblivre4.war /usr/local/tomcat/webapps/ROOT.war
 
 # Copy context.xml with database configuration
 COPY --from=build /app/WebContent/META-INF/context.xml /usr/local/tomcat/conf/Catalina/localhost/ROOT.xml

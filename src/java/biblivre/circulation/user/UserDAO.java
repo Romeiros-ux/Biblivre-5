@@ -313,7 +313,7 @@ public class UserDAO extends AbstractDAO {
 			
 			pst.executeUpdate();
 			
-			CallableStatement function = con.prepareCall("{ call global.update_user_value(?, ?, ?, ?) }");
+			CallableStatement function = con.prepareCall("{ call update_user_value(?, ?, ?, ?) }");
 
 			for (String key : user.getFields().keySet()) {
 				String value = user.getFields().get(key);
@@ -349,7 +349,7 @@ public class UserDAO extends AbstractDAO {
 			
 			PreparedStatement pst = con.prepareStatement(sql.toString());
 			
-			CallableStatement function = con.prepareCall("{ call global.update_user_value(?, ?, ?, ?) }");
+			CallableStatement function = con.prepareCall("{ call update_user_value(?, ?, ?, ?) }");
 			
 			for (AbstractDTO abstractDto : dtoList) {
 				UserDTO user = (UserDTO) abstractDto;
