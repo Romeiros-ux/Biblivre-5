@@ -3,11 +3,12 @@ services:
   - type: web
     name: biblivre5
     env: docker
-    dockerfilePath: ./Dockerfile.java21
+    dockerfilePath: ./Dockerfile
     branch: appmod/java-upgrade-20251208185505
     plan: starter
     region: oregon
     autoDeploy: true
+    dockerCommand: null
     
     # Variáveis de ambiente para conexão Supabase
     envVars:

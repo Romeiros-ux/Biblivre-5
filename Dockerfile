@@ -1,4 +1,5 @@
 # Multi-stage build for Biblivre-5 (Java 21)
+# Build timestamp: 2025-12-09T17:56:00Z - Force cache invalidation
 FROM maven:3.9-eclipse-temurin-21 AS build
 
 # Set working directory
