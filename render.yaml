@@ -1,24 +1,23 @@
 services:
-  # Web Service - Biblivre-5
+  # Web Service - Biblivre 5 (Java 21 + Spring 6.2.3 + Tomcat 10.1)
   - type: web
     name: biblivre5
     env: docker
-    dockerfilePath: ./Dockerfile
-    plan: free
+    dockerfilePath: ./Dockerfile.java21
+    branch: appmod/java-upgrade-20251208185505
+    plan: starter
+    region: oregon
     autoDeploy: true
+    
+    # Variáveis de ambiente para conexão Supabase
     envVars:
-      - key: DATABASE_URL
-        sync: false
-      - key: DB_HOST
-        sync: false
-      - key: DB_PORT
-        value: 5432
-      - key: DB_NAME
-        value: postgres
-      - key: DB_USER
-        sync: false
-      - key: DB_PASSWORD
-        sync: false
+      - key: JDBC_URL
+        value: jdbc:postgresql://aws-0-us-west-2.pooler.supabase.com:5432/postgres?sslmode=require
+      - key: JDBC_USERNAME
+        value: postgres.ouobsvpkwqbzeeapcpgw
+      - key: JDBC_PASSWORD
+        value: OgirdoR!198500
       - key: JAVA_OPTS
-        value: -Xmx512m -Xms256m
+        value: -Xmx768m -Xms256m -Djava.security.egd=file:/dev/./urandom
+    
     healthCheckPath: /
