@@ -1,5 +1,5 @@
-# Multi-stage build for Biblivre-5
-FROM maven:3.8-openjdk-8 AS build
+# Multi-stage build for Biblivre-5 (Java 21)
+FROM maven:3.9-eclipse-temurin-21 AS build
 
 # Set working directory
 WORKDIR /app
@@ -37,8 +37,8 @@ COPY WebContent/ ./WebContent/
 # Build the application
 RUN mvn clean package -DskipTests
 
-# Production stage
-FROM tomcat:8.5-jre8
+# Production stage (Java 21 + Tomcat 10.1)
+FROM tomcat:10.1-jdk21
 
 # Install curl for health checks
 RUN apt-get update && \
@@ -54,8 +54,8 @@ COPY --from=build /app/target/Biblivre4.war /usr/local/tomcat/webapps/ROOT.war
 # Copy SQL scripts for database initialization
 COPY sql/ /app/sql/
 
-# Download PostgreSQL JDBC driver (compatible version)
-ADD https://jdbc.postgresql.org/download/postgresql-42.5.4.jar /usr/local/tomcat/lib/postgresql-42.5.4.jar
+# Download PostgreSQL JDBC driver (Java 21 compatible version)
+ADD https://jdbc.postgresql.org/download/postgresql-42.7.2.jar /usr/local/tomcat/lib/postgresql-42.7.2.jar
 
 # Copy entrypoint script
 COPY docker-entrypoint.sh /usr/local/bin/
