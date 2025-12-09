@@ -1,3 +1,35 @@
 .externalToolBuilders/
 .settings/
 .svn/
+
+# Build outputs
+target/
+*.class
+
+# Logs
+*.log
+hs_err_*.log
+init-supabase.log
+
+# Test/utility scripts (keep only essential ones)
+Test*.java
+Simple*.java
+Initialize*.java
+Verify*.java
+test-*.bat
+verify-*.bat
+testar-*.bat
+testar-*.ps1
+insert-translations*.bat
+
+# Temporary SQL files
+sql/split/0_limpar_completo.sql
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db

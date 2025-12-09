@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context displayName="Biblivre 4" path="/biblivre4" crossContext="true">
-	<Resource auth="Container" driverClassName="org.postgresql.Driver" logAbandoned="false" removeAbandoned="true" removeAbandonedTimeout="60" maxActive="50" maxIdle="30" maxWait="-1" username="biblivre" password="abracadabra" type="javax.sql.DataSource" accessToUnderlyingConnectionAllowed="true" name="jdbc/biblivre3" url="jdbc:postgresql://127.0.0.1:5432/biblivre3"/>
-	<Resource auth="Container" driverClassName="org.postgresql.Driver" logAbandoned="false" removeAbandoned="true" removeAbandonedTimeout="60" maxActive="50" maxIdle="30" maxWait="-1" username="biblivre" password="abracadabra" type="javax.sql.DataSource" accessToUnderlyingConnectionAllowed="true" name="jdbc/biblivre4_b3b_restore" url="jdbc:postgresql://127.0.0.1:5432/biblivre4_b3b_restore"/>	
-	<Resource auth="Container" driverClassName="org.postgresql.Driver" logAbandoned="false" removeAbandoned="true" removeAbandonedTimeout="60" maxActive="50" maxIdle="30" maxWait="-1" username="biblivre" password="abracadabra" type="javax.sql.DataSource" accessToUnderlyingConnectionAllowed="true" name="jdbc/biblivre4" url="jdbc:postgresql://127.0.0.1:5432/biblivre4"/>
+	<!-- Supabase PostgreSQL Connection -->
+	<Resource auth="Container" 
+		driverClassName="org.postgresql.Driver" 
+		logAbandoned="false" 
+		removeAbandoned="true" 
+		removeAbandonedTimeout="60" 
+		maxActive="50" 
+		maxIdle="30" 
+		maxWait="-1" 
+		username="postgres.ouobsvpkwqbzeeapcpgw" 
+		password="OgirdoR!198500" 
+		type="javax.sql.DataSource" 
+		accessToUnderlyingConnectionAllowed="true" 
+		name="jdbc/biblivre4" 
+		url="jdbc:postgresql://aws-0-us-west-2.pooler.supabase.com:5432/postgres?sslmode=require"/>
+	
+	<!-- Backup connections (legacy - keep for migration purposes) -->
+	<Resource auth="Container" 
+		driverClassName="org.postgresql.Driver" 
+		logAbandoned="false" 
+		removeAbandoned="true" 
+		removeAbandonedTimeout="60" 
+		maxActive="50" 
+		maxIdle="30" 
+		maxWait="-1" 
+		username="postgres.ouobsvpkwqbzeeapcpgw" 
+		password="OgirdoR!198500" 
+		type="javax.sql.DataSource" 
+		accessToUnderlyingConnectionAllowed="true" 
+		name="jdbc/biblivre3" 
+		url="jdbc:postgresql://aws-0-us-west-2.pooler.supabase.com:5432/postgres?sslmode=require"/>
+	
+	<Resource auth="Container" 
+		driverClassName="org.postgresql.Driver" 
+		logAbandoned="false" 
+		removeAbandoned="true" 
+		removeAbandonedTimeout="60" 
+		maxActive="50" 
+		maxIdle="30" 
+		maxWait="-1" 
+		username="postgres.ouobsvpkwqbzeeapcpgw" 
+		password="OgirdoR!198500" 
+		type="javax.sql.DataSource" 
+		accessToUnderlyingConnectionAllowed="true" 
+		name="jdbc/biblivre4_b3b_restore" 
+		url="jdbc:postgresql://aws-0-us-west-2.pooler.supabase.com:5432/postgres?sslmode=require"/>
 </Context>
