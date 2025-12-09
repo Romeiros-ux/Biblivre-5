@@ -1,6 +1,13 @@
 # Multi-stage build for Biblivre-5 with Java 21 and Spring 6.2.3
 FROM maven:3.9-eclipse-temurin-21 AS build
 
+# Set Java environment variables explicitly
+ENV JAVA_HOME=/opt/java/openjdk
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
+
+# Verify Java version
+RUN java -version && mvn -version
+
 # Set working directory
 WORKDIR /app
 
@@ -22,14 +29,17 @@ RUN mvn install:install-file -Dfile=a2j-2.0.4.jar -DgroupId=org.jzkit -Dartifact
 
 # Download dependencies (cached layer if pom.xml doesn't change)
 WORKDIR /app
-RUN mvn dependency:go-offline -B
+RUN mvn dependency:go-offline -B || true
 
 # Copy source code
 COPY src/ ./src/
 COPY WebContent/ ./WebContent/
 
-# Build WAR
-RUN mvn clean package -DskipTests
+# Build WAR with explicit Java 21 settings
+RUN mvn clean package -DskipTests \
+    -Dmaven.compiler.source=21 \
+    -Dmaven.compiler.target=21 \
+    -Dmaven.compiler.release=21
 
 # Runtime stage with Tomcat 10 (Jakarta EE 10)
 FROM tomcat:10.1-jdk21
