@@ -268,8 +268,11 @@ public class UpdatesDAO extends AbstractDAO {
 		deletePst.execute();
 		
 		
-		StringBuilder sql = new StringBuilder();			
-		sql.append("INSERT INTO ").append(recordType).append("_indexing_groups (translation_key, datafields, sortable) VALUES (?, ?, ?);");
+		StringBuilder sql = new StringBuilder();
+		// Usar DEFAULT explicitamente para id e permitir que PostgreSQL gere os timestamps
+		sql.append("INSERT INTO ").append(recordType).append("_indexing_groups ")
+		   .append("(id, translation_key, datafields, sortable, default_sort, created, created_by, modified, modified_by) ")
+		   .append("VALUES (DEFAULT, ?, ?, ?, false, now(), NULL, now(), NULL) RETURNING id;");
 		
 		PreparedStatement pst = con.prepareStatement(sql.toString());
 		
@@ -277,7 +280,11 @@ public class UpdatesDAO extends AbstractDAO {
 		pst.setString(2, datafields);
 		pst.setBoolean(3, sortable);
 		
-		pst.execute();
+		ResultSet rs = pst.executeQuery();
+		if (rs.next()) {
+			int generatedId = rs.getInt("id");
+			System.out.println("[DEBUG] IndexingGroup criado com id=" + generatedId + " para " + recordType + "." + name);
+		}
 	}
 
 	public void updateIndexingGroup(Connection con, RecordType recordType, String name, String datafields) throws SQLException {
