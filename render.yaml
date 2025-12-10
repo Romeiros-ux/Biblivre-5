@@ -12,11 +12,15 @@ services:
     
     # Variáveis de ambiente para conexão Supabase
     envVars:
-      - key: JDBC_URL
-        value: jdbc:postgresql://aws-0-us-west-2.pooler.supabase.com:5432/postgres?sslmode=require
-      - key: JDBC_USERNAME
+      - key: DB_HOST
+        value: aws-0-us-west-2.pooler.supabase.com
+      - key: DB_PORT
+        value: 5432
+      - key: DB_NAME
+        value: postgres
+      - key: DB_USER
         value: postgres.ouobsvpkwqbzeeapcpgw
-      - key: JDBC_PASSWORD
+      - key: DB_PASSWORD
         value: OgirdoR!198500
       - key: JAVA_OPTS
         value: -Xmx768m -Xms256m -Djava.security.egd=file:/dev/./urandom
