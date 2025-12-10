@@ -10,12 +10,12 @@ services:
     autoDeploy: true
     dockerCommand: null
     
-    # Variáveis de ambiente para conexão Supabase
+    # Variáveis de ambiente para conexão Supabase (Transaction Mode)
     envVars:
       - key: DB_HOST
         value: aws-0-us-west-2.pooler.supabase.com
       - key: DB_PORT
-        value: 5432
+        value: 6543
       - key: DB_NAME
         value: postgres
       - key: DB_USER
