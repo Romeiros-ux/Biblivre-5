@@ -41,22 +41,38 @@ public class LanguagesDAO extends AbstractDAO {
 		Connection con = null;
 		try {
 			con = this.getConnection();
+			
+			// DEBUG: Ver qual schema está sendo usado
+			Statement schemaCheck = con.createStatement();
+			ResultSet schemaRs = schemaCheck.executeQuery("SELECT current_schema()");
+			if (schemaRs.next()) {
+				System.out.println("DEBUG LanguagesDAO current_schema: " + schemaRs.getString(1));
+			}
+			schemaCheck.close();
+			
 			StringBuilder sql = new StringBuilder(); 
 
 			sql.append("SELECT language, text as name FROM translations WHERE key = 'language_name' ");			
 			sql.append("ORDER BY name;");
 
+			System.out.println("DEBUG LanguagesDAO.list() SQL: " + sql.toString());
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql.toString());
 
+			int count = 0;
 			while (rs.next()) {
 				try {
-					set.add(this.populateDTO(rs));
+					LanguageDTO dto = this.populateDTO(rs);
+					System.out.println("DEBUG LanguagesDAO found: " + dto.getLanguage() + " = " + dto.getName());
+					set.add(dto);
+					count++;
 				} catch (Exception e) {
 					this.logger.error(e.getMessage(), e);
 				}
 			}
+			System.out.println("DEBUG LanguagesDAO.list() returned " + count + " languages");
 		} catch (Exception e) {
+			System.out.println("DEBUG LanguagesDAO.list() ERROR: " + e.getMessage());
 			throw new DAOException(e);
 		} finally {
 			this.closeConnection(con);

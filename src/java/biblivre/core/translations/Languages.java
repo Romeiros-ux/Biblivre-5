@@ -64,21 +64,27 @@ public class Languages extends StaticBO {
 	
 	public static boolean isLoaded(String schema, String language) {
 		if (StringUtils.isBlank(schema) || StringUtils.isBlank(language)) {
+			System.out.println("DEBUG Languages.isLoaded: schema=" + schema + ", language=" + language + " -> BLANK, returning false");
 			return false;
 		}
 		
 		Set<LanguageDTO> languages = Languages.getLanguages(schema);
 		
 		if (languages == null) {
+			System.out.println("DEBUG Languages.isLoaded: schema=" + schema + ", language=" + language + " -> languages NULL, returning false");
 			return false;
 		}
 		
+		System.out.println("DEBUG Languages.isLoaded: checking language=" + language + " in " + languages.size() + " loaded languages");
 		for (LanguageDTO dto : languages) {
+			System.out.println("DEBUG   comparing '" + language + "' with '" + dto.getLanguage() + "' -> equals: " + language.equals(dto.getLanguage()));
 			if (language.equals(dto.getLanguage())) {
+				System.out.println("DEBUG Languages.isLoaded: FOUND " + language);
 				return true;
 			}
 		}
 		
+		System.out.println("DEBUG Languages.isLoaded: NOT FOUND " + language);
 		return false;
 	}
 	
@@ -118,9 +124,16 @@ public class Languages extends StaticBO {
 		}
 		
 		Languages.logger.debug("Loading languages from " + schema);
+		System.out.println("DEBUG Languages.loadLanguages: schema=" + schema);
 		LanguagesDAO dao = LanguagesDAO.getInstance(schema);
 		
 		set = dao.list();
+		System.out.println("DEBUG Languages.loadLanguages: loaded " + (set != null ? set.size() : 0) + " languages");
+		if (set != null) {
+			for (LanguageDTO dto : set) {
+				System.out.println("DEBUG   - " + dto.getLanguage());
+			}
+		}
 		Languages.languages.put(schema, set);
 
 		return set;

@@ -350,31 +350,39 @@ public class ExtendedRequest extends HttpServletRequestWrapper {
 
 		String schema = this.getSchema();
 		String language = this.getString("i18n");
+		System.out.println("DEBUG loadLanguage: schema=" + schema + ", i18n param=" + language);
 
 		if (Languages.isNotLoaded(schema, language)) {
 			language = (String) session.getAttribute(schema + ".language");
+			System.out.println("DEBUG loadLanguage: from session=" + language);
 		}
 
 		if (Languages.isNotLoaded(schema, language)) {
 			language = (String) session.getAttribute("global.language");
+			System.out.println("DEBUG loadLanguage: from global session=" + language);
 		}
 
 		if (Languages.isNotLoaded(schema, language)) {
 			language = this.getLocale().toString().replaceAll("[_]", "-");
+			System.out.println("DEBUG loadLanguage: from locale=" + language);
 		}
 
 		if (Languages.isNotLoaded(schema, language)) {
 			language = Configurations.getString(schema, Constants.CONFIG_DEFAULT_LANGUAGE);
+			System.out.println("DEBUG loadLanguage: from config=" + language + ", isNotLoaded=" + Languages.isNotLoaded(schema, language));
 		}
 
 		if (Languages.isNotLoaded(schema, language)) {
 			language = "pt-BR";
+			System.out.println("DEBUG loadLanguage: hardcoded pt-BR, isNotLoaded=" + Languages.isNotLoaded(schema, language));
 		}
 
 		if (Languages.isNotLoaded(schema, language)) {
 			language = Languages.getDefaultLanguage(schema);
+			System.out.println("DEBUG loadLanguage: from default=" + language);
 		}
 
+		System.out.println("DEBUG loadLanguage FINAL: schema=" + schema + ", language=" + language);
 		this.setSessionAttribute(schema, "language", language);
 
 		this.setLanguage(language);
