@@ -9,6 +9,7 @@ cat > /usr/local/tomcat/conf/Catalina/localhost/ROOT.xml <<EOF
 <Context displayName="Biblivre 5" path="/" crossContext="true">
 	<Resource 
 		auth="Container" 
+		factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
 		driverClassName="org.postgresql.Driver" 
 		logAbandoned="false" 
 		removeAbandonedOnBorrow="true" 
@@ -31,6 +32,7 @@ cat > /usr/local/tomcat/conf/Catalina/localhost/ROOT.xml <<EOF
 	/>
 	<Resource 
 		auth="Container" 
+		factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
 		driverClassName="org.postgresql.Driver" 
 		logAbandoned="false" 
 		removeAbandonedOnBorrow="true" 
@@ -53,6 +55,7 @@ cat > /usr/local/tomcat/conf/Catalina/localhost/ROOT.xml <<EOF
 	/>
 	<Resource 
 		auth="Container" 
+		factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
 		driverClassName="org.postgresql.Driver" 
 		logAbandoned="false" 
 		removeAbandonedOnBorrow="true" 

@@ -56,7 +56,7 @@ COPY --from=build /app/target/Biblivre4.war /usr/local/tomcat/webapps/ROOT.war
 COPY sql/ /app/sql/
 
 # Download PostgreSQL JDBC driver (Java 21 compatible version)
-ADD https://jdbc.postgresql.org/download/postgresql-42.7.2.jar /usr/local/tomcat/lib/postgresql-42.7.2.jar
+ADD --chmod=644 https://jdbc.postgresql.org/download/postgresql-42.7.2.jar /usr/local/tomcat/lib/postgresql-42.7.2.jar
 
 # Copy entrypoint script
 COPY docker-entrypoint.sh /usr/local/bin/

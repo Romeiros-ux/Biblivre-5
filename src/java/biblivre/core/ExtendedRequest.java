@@ -381,7 +381,10 @@ public class ExtendedRequest extends HttpServletRequestWrapper {
 	}
 	
 	private void loadTranslationsMap() {
-		this.setTranslationsMap(Translations.get(this.schema, this.language));
+		System.out.println("DEBUG loadTranslationsMap: schema=" + this.schema + ", language=" + this.language);
+		TranslationsMap map = Translations.get(this.schema, this.language);
+		System.out.println("DEBUG TranslationsMap loaded, language_code=" + (map != null ? map.getText("language_code") : "NULL"));
+		this.setTranslationsMap(map);
 	}
 	
 	@Deprecated	@Override
