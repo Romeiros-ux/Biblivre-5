@@ -28,7 +28,7 @@ cat > /usr/local/tomcat/conf/Catalina/localhost/ROOT.xml <<EOF
 		testWhileIdle="true"
 		timeBetweenEvictionRunsMillis="30000"
 		name="jdbc/biblivre4" 
-		url="jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require&amp;currentSchema=public&amp;pgbouncer=true&amp;prepareThreshold=0&amp;loggerLevel=TRACE"
+		url="jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require&amp;currentSchema=public&amp;pgbouncer=true&amp;prepareThreshold=0&amp;loggerLevel=TRACE&amp;characterEncoding=UTF-8"
 	/>
 	<Resource 
 		auth="Container" 
@@ -51,7 +51,7 @@ cat > /usr/local/tomcat/conf/Catalina/localhost/ROOT.xml <<EOF
 		testWhileIdle="true"
 		timeBetweenEvictionRunsMillis="30000"
 		name="jdbc/biblivre3" 
-		url="jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require&amp;currentSchema=public&amp;pgbouncer=true&amp;prepareThreshold=0&amp;loggerLevel=TRACE"
+		url="jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require&amp;currentSchema=public&amp;pgbouncer=true&amp;prepareThreshold=0&amp;loggerLevel=TRACE&amp;characterEncoding=UTF-8"
 	/>
 	<Resource 
 		auth="Container" 
@@ -74,7 +74,7 @@ cat > /usr/local/tomcat/conf/Catalina/localhost/ROOT.xml <<EOF
 		testWhileIdle="true"
 		timeBetweenEvictionRunsMillis="30000"
 		name="jdbc/biblivre4_b3b_restore" 
-		url="jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require&amp;currentSchema=public&amp;pgbouncer=true&amp;prepareThreshold=0&amp;loggerLevel=TRACE"
+		url="jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=require&amp;currentSchema=public&amp;pgbouncer=true&amp;prepareThreshold=0&amp;loggerLevel=TRACE&amp;characterEncoding=UTF-8"
 	/>
 </Context>
 EOF

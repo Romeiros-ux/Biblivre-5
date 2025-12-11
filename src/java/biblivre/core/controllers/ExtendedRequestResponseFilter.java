@@ -39,6 +39,11 @@ public class ExtendedRequestResponseFilter implements Filter {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		// Set UTF-8 encoding BEFORE processing request/response
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
 		ExtendedRequest xRequest = null;
 		ExtendedResponse xResponse = null;
 		

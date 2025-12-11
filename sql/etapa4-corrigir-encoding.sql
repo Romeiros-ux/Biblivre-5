@@ -1,0 +1,9 @@
+-- ============================================================
+-- ETAPA 4: PULE ESTA ETAPA!
+-- ============================================================
+-- O banco já está em UTF-8 correto.
+-- O problema está no código Java - precisamos verificar:
+-- 1. src/java/biblivre/core/ExtendedRequest.java
+-- 2. src/java/biblivre/core/translations/TranslationsDAO.java
+-- 
+-- Vá direto para ETAPA 5 para continuar a configuração do banco.
