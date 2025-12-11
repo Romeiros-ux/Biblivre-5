@@ -269,22 +269,23 @@ public class UpdatesDAO extends AbstractDAO {
 		
 		
 		StringBuilder sql = new StringBuilder();
-		// Usar DEFAULT explicitamente para id e permitir que PostgreSQL gere os timestamps
+		// Usar nextval() EXPLICITAMENTE para o id ao invés de confiar no DEFAULT
+		// Isso contorna qualquer interceptação que esteja adicionando NULL
 		sql.append("INSERT INTO ").append(recordType).append("_indexing_groups ")
-		   .append("(id, translation_key, datafields, sortable, default_sort, created, created_by, modified, modified_by) ")
-		   .append("VALUES (DEFAULT, ?, ?, ?, false, now(), NULL, now(), NULL) RETURNING id;");
+		   .append("(id, translation_key, datafields, sortable, default_sort) ")
+		   .append("VALUES (nextval('").append(recordType).append("_indexing_groups_id_seq'), ?, ?, ?, false);");
 		
-		PreparedStatement pst = con.prepareStatement(sql.toString());
+		String sqlString = sql.toString();
+		System.out.println("==== DEBUG SQL ==== " + sqlString);
+		System.out.println("==== PARAMS ==== name=" + name + ", datafields=" + datafields + ", sortable=" + sortable);
+		
+		PreparedStatement pst = con.prepareStatement(sqlString);
 		
 		pst.setString(1, name);
 		pst.setString(2, datafields);
 		pst.setBoolean(3, sortable);
 		
-		ResultSet rs = pst.executeQuery();
-		if (rs.next()) {
-			int generatedId = rs.getInt("id");
-			System.out.println("[DEBUG] IndexingGroup criado com id=" + generatedId + " para " + recordType + "." + name);
-		}
+		pst.execute();
 	}
 
 	public void updateIndexingGroup(Connection con, RecordType recordType, String name, String datafields) throws SQLException {
