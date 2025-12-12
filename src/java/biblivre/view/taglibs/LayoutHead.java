@@ -84,7 +84,6 @@ public class LayoutHead extends BodyTagSupport {
 			out.println("<html class=\"noscript\">");
 			out.println("<!-- " + this.getCurrentURI() + " -->");
 		out.println("<head>");
-		out.println("	<base href=\"/\">");
 		out.println("	<meta charset=\"utf-8\">");
 		out.println("	<meta name=\"google\" content=\"notranslate\" />");
 			out.println("	<title>" + Configurations.getString(schema, Constants.CONFIG_TITLE) + "</title>");
