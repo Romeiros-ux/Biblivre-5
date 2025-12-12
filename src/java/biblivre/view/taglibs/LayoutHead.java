@@ -88,28 +88,22 @@ public class LayoutHead extends BodyTagSupport {
 			out.println("	<meta name=\"google\" content=\"notranslate\" />");
 			out.println("	<title>" + Configurations.getString(schema, Constants.CONFIG_TITLE) + "</title>");
 
-			out.println("	<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\"static/images/favicon.ico\" />");
-			out.println("	<link rel=\"stylesheet\" type=\"text/css\" href=\"static/styles/biblivre.core.css\" />");
-			out.println("	<link rel=\"stylesheet\" type=\"text/css\" href=\"static/styles/biblivre.print.css\" />");
-			out.println("	<link rel=\"stylesheet\" type=\"text/css\" href=\"static/styles/jquery-ui.css\" />");
-			out.println("	<link rel=\"stylesheet\" type=\"text/css\" href=\"static/styles/font-awesome.min.css\" />");
-
-			out.println("	<script type=\"text/javascript\" src=\"static/scripts/json.js\"></script>");
+		out.println("	<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\"/static/images/favicon.ico\" />");
+		out.println("	<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/styles/biblivre.core.css\" />");
+		out.println("	<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/styles/biblivre.print.css\" />");
+		out.println("	<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/styles/jquery-ui.css\" />");
+		out.println("	<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/styles/font-awesome.min.css\" />");			out.println("	<script type=\"text/javascript\" src=\"static/scripts/json.js\"></script>");
 			out.println("	<script type=\"text/javascript\" src=\"static/scripts/jquery.js\"></script>");
-			out.println("	<script type=\"text/javascript\" src=\"static/scripts/jquery-ui.js\"></script>");
-			out.println("	<script type=\"text/javascript\" src=\"static/scripts/jquery.extras.js\"></script>");
-			out.println("	<script type=\"text/javascript\" src=\"static/scripts/lodash.js\"></script>");
-
-			out.println("	<script type=\"text/javascript\" src=\"static/scripts/globalize.js\"></script>");
-			out.println("	<script type=\"text/javascript\" src=\"static/scripts/cultures/globalize.culture." + this.getTranslationsMap().getText("language_code") + ".js\"></script>");
+		out.println("	<script type=\"text/javascript\" src=\"/static/scripts/jquery-ui.js\"></script>");
+		out.println("	<script type=\"text/javascript\" src=\"/static/scripts/jquery.extras.js\"></script>");
+		out.println("	<script type=\"text/javascript\" src=\"/static/scripts/lodash.js\"></script>");			out.println("	<script type=\"text/javascript\" src=\"/static/scripts/globalize.js\"></script>");
+			out.println("	<script type=\"text/javascript\" src=\"/static/scripts/cultures/globalize.culture." + this.getTranslationsMap().getText("language_code") + ".js\"></script>");
 			out.println("	<script type=\"text/javascript\" >Globalize.culture('" + this.getTranslationsMap().getText("language_code") + "'); </script>");
 			out.println("	<script type=\"text/javascript\" >Globalize.culture().numberFormat.currency.symbol = '" + Configurations.getString(schema, Constants.CONFIG_CURRENCY) + "'; </script>");
 
-			out.println("	<script type=\"text/javascript\" src=\"static/scripts/biblivre.core.js\"></script>");
-			out.println("	<script type=\"text/javascript\" src=\"static/scripts/" + this.getTranslationsMap().getCacheFileName() + "\"></script>");
-			
-			//TODO Check layout on IE6
-			out.println("	<!--[if lte IE 6]><script src=\"static/scripts/ie6/warning.js\"></script><script>window.onload = function(){ e('static/scripts/ie6/') }</script><![endif]-->");
+		out.println("	<script type=\"text/javascript\" src=\"/static/scripts/biblivre.core.js\"></script>");
+		out.println("	<script type=\"text/javascript\" src=\"/static/scripts/" + this.getTranslationsMap().getCacheFileName() + "\"></script>");			//TODO Check layout on IE6
+			out.println("	<!--[if lte IE 6]><script src=\"/static/scripts/ie6/warning.js\"></script><script>window.onload = function(){ e('/static/scripts/ie6/') }</script><![endif]-->");
 			//out.println("	<!--[if lte IE 9]><script src=\"static/scripts/IE9.js\"></script><![endif]-->");
 			
 //			out.println("<link rel=\"stylesheet/less\" href=\"extra/less/biblivre.less\"><script src=\"extra/js/vendor/modernizr.js\"></script><script>var less = {env: \"development\",	poll: 1000};</script><script src=\"extra/js/vendor/less.js\"></script>");
