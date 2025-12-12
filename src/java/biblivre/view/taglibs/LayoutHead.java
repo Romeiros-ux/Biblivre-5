@@ -83,16 +83,17 @@ public class LayoutHead extends BodyTagSupport {
 			out.println("<!doctype html>");
 			out.println("<html class=\"noscript\">");
 			out.println("<!-- " + this.getCurrentURI() + " -->");
-			out.println("<head>");
-			out.println("	<meta charset=\"utf-8\">");
-			out.println("	<meta name=\"google\" content=\"notranslate\" />");
+		out.println("<head>");
+		out.println("	<base href=\"/\">");
+		out.println("	<meta charset=\"utf-8\">");
+		out.println("	<meta name=\"google\" content=\"notranslate\" />");
 			out.println("	<title>" + Configurations.getString(schema, Constants.CONFIG_TITLE) + "</title>");
 
-		out.println("	<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\"/static/images/favicon.ico\" />");
-		out.println("	<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/styles/biblivre.core.css\" />");
-		out.println("	<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/styles/biblivre.print.css\" />");
-		out.println("	<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/styles/jquery-ui.css\" />");
-		out.println("	<link rel=\"stylesheet\" type=\"text/css\" href=\"/static/styles/font-awesome.min.css\" />");			out.println("	<script type=\"text/javascript\" src=\"static/scripts/json.js\"></script>");
+		out.println("	<link rel=\"shortcut icon\" type=\"image/x-icon\" href=\"static/images/favicon.ico\" />");
+		out.println("	<link rel=\"stylesheet\" type=\"text/css\" href=\"static/styles/biblivre.core.css\" />");
+		out.println("	<link rel=\"stylesheet\" type=\"text/css\" href=\"static/styles/biblivre.print.css\" />");
+		out.println("	<link rel=\"stylesheet\" type=\"text/css\" href=\"static/styles/jquery-ui.css\" />");
+		out.println("	<link rel=\"stylesheet\" type=\"text/css\" href=\"static/styles/font-awesome.min.css\" />");			out.println("	<script type=\"text/javascript\" src=\"static/scripts/json.js\"></script>");
 			out.println("	<script type=\"text/javascript\" src=\"static/scripts/jquery.js\"></script>");
 		out.println("	<script type=\"text/javascript\" src=\"/static/scripts/jquery-ui.js\"></script>");
 		out.println("	<script type=\"text/javascript\" src=\"/static/scripts/jquery.extras.js\"></script>");
