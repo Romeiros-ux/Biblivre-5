@@ -2,11 +2,6 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
   <display-name>Biblivre 5</display-name>
   <servlet>
-    <servlet-name>SchemaServlet</servlet-name>
-    <servlet-class>biblivre.core.controllers.SchemaServlet</servlet-class>
-  </servlet>
-  
-  <servlet>
     <servlet-name>default</servlet-name>
     <servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
     <init-param>
@@ -20,10 +15,10 @@
     <load-on-startup>1</load-on-startup>
   </servlet>
   
-  <servlet-mapping>
-    <servlet-name>default</servlet-name>
-    <url-pattern>/static/*</url-pattern>
-  </servlet-mapping>
+  <servlet>
+    <servlet-name>SchemaServlet</servlet-name>
+    <servlet-class>biblivre.core.controllers.SchemaServlet</servlet-class>
+  </servlet>
   
   <servlet-mapping>
     <servlet-name>SchemaServlet</servlet-name>
