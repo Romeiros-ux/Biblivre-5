@@ -223,20 +223,31 @@ public final class SchemaServlet extends HttpServlet {
 			} else {
 				response.getOutputStream().print(javascript.toJavascriptString());
 			}
-			return;
-		}
-
-		// Other static files
-		RequestDispatcher rd = this.getServletContext().getNamedDispatcher("default");
-
-		ExtendedRequest wrapped = new ExtendedRequest(request) {
-
-			@Override
-			public String getServletPath() {
-				return realPath;
-			}
-		};
-
-		rd.forward(wrapped, response);
+		return;
 	}
+
+	// Other static files
+	System.out.println("DEBUG SchemaServlet.processStaticRequest: path=" + path + ", realPath=" + realPath);
+	
+	RequestDispatcher rd = this.getServletContext().getNamedDispatcher("default");
+	
+	if (rd == null) {
+		System.err.println("ERROR: Default servlet not found! Cannot serve static file: " + realPath);
+		response.sendError(HttpServletResponse.SC_NOT_FOUND, "Default servlet not configured");
+		return;
+	}
+	
+	System.out.println("DEBUG: Forwarding to default servlet: " + realPath);
+
+	ExtendedRequest wrapped = new ExtendedRequest(request) {
+
+		@Override
+		public String getServletPath() {
+			return realPath;
+		}
+	};
+
+	rd.forward(wrapped, response);
+	System.out.println("DEBUG: Forward completed for: " + realPath);
+}
 }
