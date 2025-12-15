@@ -967,7 +967,7 @@ Header.animateLogos = function() {
 	$('#logo_support div:last').fadeOut(2000, function() {
 		var logo = $(this);
 		logo.parent().prepend(this);
-		logo.show();
+		logo.css('display', '').show();
 	});
 };
 

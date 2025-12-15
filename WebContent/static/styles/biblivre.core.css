@@ -1283,6 +1283,7 @@ ul.tabs_head li.tab_selected {
 
 #logo_support {
   position: relative;
+  position: relative;
   float: right;
   margin: 17px 17px 0 0;
   width: 88px;
@@ -1293,7 +1294,7 @@ ul.tabs_head li.tab_selected {
 #logo_support div {
   position: absolute;
   top: 0;
-  right: 0;
+  left: 0;
 }
 #logo_support div img {
   -webkit-border-radius: 6px;
