@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Teste CSS Biblivre</title>
+    <link rel="stylesheet" type="text/css" href="static/styles/biblivre.core.css">
+</head>
+<body>
+    <div id="header">
+        <div id="logo_biblivre">
+            <img src="static/images/logo.png" alt="Biblivre">
+        </div>
+        <div id="logo_support">
+            <div><img src="static/images/logo_pedro_i.png" width="88" height="66" alt="Logo 1"></div>
+            <div><img src="static/images/logo_sabin.png" width="88" height="66" alt="Logo 2"></div>
+            <div><img src="static/images/logo_bn.png" width="88" height="66" alt="Logo 3"></div>
+            <div><img src="static/images/logo_lei.png" width="88" height="66" alt="Logo 4"></div>
+        </div>
+    </div>
+
+    <h1 style="margin: 20px;">Teste de CSS</h1>
+
+    <script>
+        console.log('=== TESTE DE CSS ===');
+        
+        var header = document.getElementById('header');
+        var styles = window.getComputedStyle(header);
+        
+        console.log('Header background-image:', styles.backgroundImage);
+        console.log('Header height:', styles.height);
+        console.log('Header background-color:', styles.backgroundColor);
+        
+        var logoSupport = document.getElementById('logo_support');
+        var logoDivs = logoSupport.querySelectorAll('div');
+        
+        console.log('Logo support divs:', logoDivs.length);
+        console.log('First logo div position:', window.getComputedStyle(logoDivs[0]).position);
+        console.log('First logo div display:', window.getComputedStyle(logoDivs[0]).display);
+        
+        // Verificar se CSS carregou
+        var cssLoaded = styles.backgroundImage !== 'none';
+        console.log('CSS CARREGADO?', cssLoaded);
+        
+        if (cssLoaded) {
+            console.log('✅ CSS carregou corretamente!');
+        } else {
+            console.log('❌ CSS NÃO carregou!');
+        }
+    </script>
+</body>
+</html>
